@@ -44,7 +44,7 @@ const Layout = () => {
             {isMobile && <MobileHeader />}
             { !isMobile && <Sidebar />}
           </div>            
-          <div className={`flex-grow-1 p-4 ${!isMobile ? 'mobile-content' : ''}`} style={{marginLeft: !isMobile ? 280 : null}}>
+          <div className={`flex-grow-1 p-4 ${isMobile ? 'mobile-content' : ''}`} style={{marginLeft: !isMobile ? 280 : null}}>
               <Outlet />
           </div>  
           <div>
