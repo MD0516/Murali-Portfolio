@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Sidebar from '../Components/Sidebar'
 import { Outlet } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
@@ -21,7 +21,7 @@ const Layout = () => {
     return () => clearTimeout(timer);
   }, [location]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
     
     const handleResize = () => {
