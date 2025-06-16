@@ -11,6 +11,11 @@
   transition: all .3s ;
 }
 
+.sidebar {
+  border-right: #7c7b7b 1px solid;
+  height: 100%;
+}
+
 .nav a:hover{
   color: white;
   scale: 1.12;
@@ -18,6 +23,10 @@
 
 .nav a svg {
   transition: all .3s ;
+}
+
+.nav a span {
+  background-color: inherit;
 }
 
 .icon {
@@ -40,10 +49,6 @@
 .custom-hover a:hover {
   scale: 1.2;
   color: #fff !important;
-}
-
-.sidebar{  
-  height: fit-content;
 }
 
 .custom-color-responsiveness{
@@ -121,9 +126,8 @@
   padding: 5px;
   position: fixed;
   z-index: 10;
-  border: #fff 1px solid;
-  border-radius: 50%;
   top: 10px;
+  cursor: pointer;
 }
 
 .left-toggled {
@@ -131,10 +135,9 @@
   position: fixed;
   z-index: 10;
   padding: 5px;
-  border: #fff 1px solid;
-  border-radius: 50%;
   top: 10px;
   left: 70px;
+  cursor: pointer;
 }
 
 .search-box input{
@@ -199,17 +202,9 @@
   visibility: visible;
 }
 
-
 .row-custom {
   margin-right: 0;
   margin-left: 0;
-}
-
-.toggled-sidebar {
-  border-right: 1px solid #7c7b7b;
-  height: 100vh !important;
-  width: fit-content;
-  position: fixed;
 }
 
 .mobile-header {
@@ -217,7 +212,6 @@
   width: 100%;
   height: fit-content;
   position: fixed;
-  z-index: 999;
 }
 
 .mobile-header div,
@@ -264,20 +258,13 @@
   margin: 70px 0;
 }
 
-@media (min-width: 768px) {
-  .sidebar{
-    border-right: 1px solid #7c7b7b;
-    height: 100vh !important;
-    width: 30vw;
-    position: fixed;
-  }
+.toggle-button {
+  cursor: pointer;
+}
 
+@media (min-width: 768px) {
   .active {
     width: 110% !important;
-  }
-
-  .left-toggle{
-    left: 27.6vw;
   }
 
   .custom-color-responsiveness {
@@ -288,46 +275,8 @@
     width: 50vw;
   }
 
-  .content-height{
-    height: 100% !important;
-    margin-left: 30vw;
-  }
-
   .skill-content {
     margin-left: 20px;
   }
 
-}
-@media (min-width: 1024px) {
-  .sidebar{
-    width: 27vw;
-  }
-  .left-toggle{
-    left: 25vw;
-  }
-  .content-height{
-    margin-left: 27vw;
-  }
-}
-@media (min-width: 1370px) {
-  .sidebar{
-    width: 20vw;
-  }
-  .left-toggle{
-    left: 18.5vw;
-  }
-  .content-height{
-    margin-left: 20vw;
-  }
-}
-@media (min-width: 1600px) {
-  .sidebar{
-    width: 17vw;
-  }
-  .left-toggle{
-    left: 15.9vw;
-  }
-  .content-height{
-    margin-left: 17vw;
-  }
 }

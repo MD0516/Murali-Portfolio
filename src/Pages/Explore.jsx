@@ -35,7 +35,7 @@ const Explore = () => {
         </div>
       </div>
 
-      <div className='container-fluid py-2 custom-color-responsiveness'>
+      <div className='container-fluid py-2 custom-color-responsiveness '>
         <h3 className='text-white '>What you'll Find Here :</h3>
         <div className='row g-4 my-2'>
           {
