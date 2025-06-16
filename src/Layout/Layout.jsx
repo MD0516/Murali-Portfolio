@@ -22,18 +22,19 @@ const Layout = () => {
   }, [location]);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    
     const handleResize = () => {
-      setIsMobile(window.innerWidth >= 768);
+      setIsMobile(mediaQuery.matches);
     };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-    
+    mediaQuery.addEventListener('change', handleResize); // For screen size changes
+
+    return () => mediaQuery.removeEventListener('change', handleResize);
   }, []);
+
 
   return (
     <>
