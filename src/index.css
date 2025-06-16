@@ -236,6 +236,8 @@
   width: 100%;
   height: fit-content;
   position: fixed;
+  top: 0;
+  z-index: 999;
 }
 
 .mobile-header div,
@@ -252,6 +254,7 @@
   height: fit-content;
   background-color: #171717;
   border-top: #2b2b2b 1px solid;
+  z-index: 999;
 }
 
 .mobile-nav a {
