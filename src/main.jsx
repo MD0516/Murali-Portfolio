@@ -10,5 +10,5 @@ import { router } from './Routes/Routes.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </StrictMode>
 )

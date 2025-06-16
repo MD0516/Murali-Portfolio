@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { motion, AnimatePresence, easeInOut } from 'framer-motion'
 
 const Skills = () => {
   const frontEnd = [
@@ -102,21 +102,23 @@ const Skills = () => {
 
   return (
     <div className='content-height'>
-      
-      <div className='container-fluid py-2 custom-color-responsiveness'>
-        <h2 className='text-white fs-1 fw-bolder'>Tools I Use Daily</h2>
-        <p className='fw-bold fs-5'>From coding to deployment — here’s what I use regularly</p>
-      </div>
+      <AnimatePresence>
+        <motion.div initial={{opacity: 0, y:-400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
+          <h2 className='text-white fs-1 fw-bolder'>Tools I Use Daily</h2>
+          <p className='fw-bold fs-5'>From coding to deployment — here’s what I use regularly</p>
+        </motion.div>
+      </AnimatePresence>
 
-      <div className='container-fluid py-2 custom-color-responsiveness'>
-        <div className='search-box'>
-          <label htmlFor="searchBox">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 376 384"><path fill="currentColor" d="m267 235l106 106l-32 32l-106-106v-17l-6-6q-39 33-90 33q-58 0-98.5-40.5T0 138.5t40.5-98t98-40.5t98 40.5T277 139q0 51-33 90l6 6h17zm-128 0q40 0 68-28t28-68t-28-68t-68-28t-68 28t-28 68t28 68t68 28z"/></svg>
-          </label>
-          <input type="text" name='searchBox' id='searchBox' placeholder='Search Tools...' value={formValue} onChange={handleChange} />
-        </div>
-      </div>
-
+      <AnimatePresence>
+        <motion.div initial={{opacity: 0, y:1400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:1400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
+          <div className='search-box'>
+            <label htmlFor="searchBox">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 376 384"><path fill="currentColor" d="m267 235l106 106l-32 32l-106-106v-17l-6-6q-39 33-90 33q-58 0-98.5-40.5T0 138.5t40.5-98t98-40.5t98 40.5T277 139q0 51-33 90l6 6h17zm-128 0q40 0 68-28t28-68t-28-68t-68-28t-68 28t-28 68t28 68t68 28z"/></svg>
+            </label>
+            <input type="text" name='searchBox' id='searchBox' placeholder='Search Tools...' value={formValue} onChange={handleChange} />
+          </div>
+        </motion.div>
+      </AnimatePresence>
       <div className='skill-content'>
         {
           (formValue === '' || foundFrontEndItems.length > 0) ? (
@@ -127,26 +129,29 @@ const Skills = () => {
               </div>
 
               <div className='row row-custom g-4 p-3 skill-section'>
-                {
-                  (formValue ? foundFrontEndItems : frontEnd).map((index, i) => {
-                    return (
-                      <div className='col-12 col-lg-6 p-2' key={i}>                
-                        <a href={index.link} target='_blank' className='text-decoration-none '>
-                          <div className='skill d-flex flex-column gap-2'>
-                            <div className='d-flex flex-row align-items-center gap-2'>
-                              {index.logo}
-                              <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
-                                {index.title}
-                                <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
-                              </h5>
-                            </div>                      
-                            <p>{index.description}</p>
-                          </div>
-                        </a>
-                      </div>
-                    )
-                  })
-                }
+                <AnimatePresence>
+                  {
+                    (formValue ? foundFrontEndItems : frontEnd).map((index, i) => {
+                      const fromDir = i % 2 == 0 ? -200 : 200
+                      return (
+                        <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 p-2' key={i}>                
+                          <a href={index.link} target='_blank' className='text-decoration-none '>
+                            <div className='skill d-flex flex-column gap-2'>
+                              <div className='d-flex flex-row align-items-center gap-2'>
+                                {index.logo}
+                                <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
+                                  {index.title}
+                                  <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
+                                </h5>
+                              </div>                      
+                              <p>{index.description}</p>
+                            </div>
+                          </a>
+                        </motion.div>
+                      )
+                    })
+                  }
+                </AnimatePresence>
               </div>        
             </div>) : (
             <div className='container-fluid py-2 custom-color-responsiveness ' >
@@ -172,8 +177,9 @@ const Skills = () => {
             <div className='row row-custom g-4 p-3 skill-section'>
               {
                 (formValue ? foundBackEndItems : backEnd).map((index, i) => {
+                  const fromDir = i % 2 == 0 ? -200 : 200
                   return (
-                    <div className='col-12 col-lg-6 ' key={i}>                
+                    <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
                       <a href={index.link} target='_blank' className='text-decoration-none'>
                         <div className='skill d-flex flex-column gap-2'>
                           <div className='d-flex flex-row align-items-center gap-3'>
@@ -186,7 +192,7 @@ const Skills = () => {
                           <p>{index.description}</p>
                         </div>
                       </a>
-                    </div>
+                    </motion.div>
                   )
                 })
               }
@@ -215,8 +221,9 @@ const Skills = () => {
             <div className='row row-custom g-4 p-3 skill-section'>
               {
                 (formValue ? foundDevelopmentEndItems : developmentTools).map((index, i) => {
+                  const fromDir = i % 2 == 0 ? -200 : 200
                   return (
-                    <div className='col-12 col-lg-6 ' key={i}>                
+                    <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
                       <a href={index.link} target='_blank' className='text-decoration-none'>
                         <div className='skill d-flex flex-column gap-2'>
                           <div className='d-flex flex-row align-items-center gap-3'>
@@ -229,7 +236,7 @@ const Skills = () => {
                           <p>{index.description}</p>
                         </div>
                       </a>
-                    </div>
+                    </motion.div>
                   )
                 })
               }
