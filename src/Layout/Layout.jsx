@@ -41,14 +41,14 @@ const Layout = () => {
       <LoadingBar color='#7c7b7b' ref={ref} height={2} background='transparent' shadow={false} />
         <div className='d-flex flex-column flex-md-row'>
           <div>
-            {!isMobile && <MobileHeader />}
-            { isMobile && <Sidebar />}
+            {isMobile && <MobileHeader />}
+            { !isMobile && <Sidebar />}
           </div>            
-          <div className={`flex-grow-1 p-4 ${!isMobile ? 'mobile-content' : ''}`} style={{marginLeft: isMobile ? 280 : null}}>
+          <div className={`flex-grow-1 p-4 ${!isMobile ? 'mobile-content' : ''}`} style={{marginLeft: !isMobile ? 280 : null}}>
               <Outlet />
           </div>  
           <div>
-            {!isMobile && <MobileNav />}
+            {isMobile && <MobileNav />}
           </div>          
         </div>
     </>
