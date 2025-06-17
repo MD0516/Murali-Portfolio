@@ -89,7 +89,7 @@ const Explore = () => {
         </motion.div>}
 
       <AnimatePresence>
-        {animateNow && <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2 custom-color-responsiveness'>
+        {animateNow && <motion.div initial={{opacity: 0, y: xDir}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y: xDir}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2 custom-color-responsiveness'>
           <h3 className='text-white '>Why this portfolio ?</h3>
           <div className='row my-3'>
             <div className='col'>
