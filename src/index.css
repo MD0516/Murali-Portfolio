@@ -293,6 +293,85 @@ body {
   cursor: pointer;
 }
 
+.project-img {
+  border: #7c7b7b2a 1px solid;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  padding: 7px;
+  margin-bottom: 0;
+  transition: all .1s linear;
+  overflow: hidden;
+}
+
+.project-img img {
+  width: 100%;
+  object-fit: cover;
+  transition: all .1s linear;
+}
+
+.project-description {
+  border: #7c7b7b2a 1px solid;
+  border-top: none;
+  margin-top: 0;
+  border-radius: 0 0 7px 7px ;
+  padding: 7px;
+  transition: all .1s linear;
+}
+
+.tech-name {
+  background-color: #1c1c1c;
+  color: #fff;
+  border-radius: 6%;
+  padding: 2px 7px;
+}
+
+.project-title{
+  text-align: justify;
+  transition: all .1s linear;
+}
+
+.project-link a {
+  padding: 7px;
+  border-radius: 7px;
+  color: #fff;
+  transition: all .1s linear;
+}
+
+.project-title h3 {
+  transition: all .1s linear;
+}
+
+.project-link a:hover {
+  background-color: #2b2b2b;
+}
+
+.project-card {
+  cursor: pointer;
+  transition: all .1s linear;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.project-card:hover .project-img img {
+  scale: 1.02;
+}
+
+.project-card:hover .project-description .project-title h3 {
+  color: #fff;
+}
+
+.project-card:hover .project-img {
+  border: #858585 solid 1px;
+  border-bottom: none;
+}
+
+.project-card:hover .project-description {
+  border: #858585 solid 1px;
+  border-top: none;
+}
+
 @media (min-width: 768px) {
   .active {
     width: 110% !important;

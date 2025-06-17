@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence, easeInOut } from 'framer-motion'
 
 const Skills = () => {
@@ -105,61 +105,88 @@ const Skills = () => {
   const foundBackEndItems = backEnd.filter(item => item.title.toLowerCase().startsWith(formValue.toLowerCase()))
   const foundDevelopmentEndItems = developmentTools.filter(item => item.title.toLowerCase().startsWith(formValue.toLowerCase()))
 
+  const [xDir, setXDir] = useState(window.innerWidth > 768 ? 200 : 13);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktopNow = window.innerWidth > 768;
+      setXDir(isDesktopNow ? 200 : 13);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const [animateNow, setAnimateNow] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const timeout = setTimeout(() => {
+      setAnimateNow(true);
+    }, 500); 
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className='content-height'>
       <AnimatePresence>
-        <motion.div initial={{opacity: 0, y:-400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
+        {animateNow && <motion.div initial={{opacity: 0, y:-400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
           <h2 className='text-white fs-1 fw-bolder'>Tools I Use Daily</h2>
-          <p className='fw-bold fs-5'>From coding to deployment — here’s what I use regularly</p>
-        </motion.div>
+          <p className='fw-semibold fs-5'>From coding to deployment — here’s what I use regularly</p>
+        </motion.div>}
       </AnimatePresence>
 
       <AnimatePresence>
-        <motion.div initial={{opacity: 0, y:1400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:1400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
+        {animateNow && <motion.div initial={{opacity: 0, y:1400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:1400}} transition={{duration:.8, ease: 'easeInOut'}} className='container-fluid py-2 custom-color-responsiveness'>
           <div className='search-box'>
             <label htmlFor="searchBox">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 376 384"><path fill="currentColor" d="m267 235l106 106l-32 32l-106-106v-17l-6-6q-39 33-90 33q-58 0-98.5-40.5T0 138.5t40.5-98t98-40.5t98 40.5T277 139q0 51-33 90l6 6h17zm-128 0q40 0 68-28t28-68t-28-68t-68-28t-68 28t-28 68t28 68t68 28z"/></svg>
             </label>
             <input type="text" name='searchBox' id='searchBox' placeholder='Search Tools...' value={formValue} onChange={handleChange} />
           </div>
-        </motion.div>
+        </motion.div>}
       </AnimatePresence>
       <div className='skill-content'>
         {
           (formValue === '' || foundFrontEndItems.length > 0) ? (
-            <div className='container-fluid py-2 custom-color-responsiveness '>
+            animateNow && (
+            <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2 custom-color-responsiveness '>
               <div className='heading text-white fs-2 fw-semibold p-3'>
                 Front-End Technologies
                 <p className='fs-5 fw-normal pt-1' style={{backgroundColor:'#1d1d1d', color:'#858585'}}>Crafting interactive and responsive interfaces using modern front-end technologies</p>
               </div>
 
               <div className='row row-custom g-4 p-3 skill-section'>
-                <AnimatePresence>
                   {
                     (formValue ? foundFrontEndItems : frontEnd).map((index, i) => {
-                      const fromDir = i % 2 == 0 ? -200 : 200
+                      const fromDir = i % 2 == 0 ? -xDir : xDir
                       return (
-                        <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 p-2' key={i}>                
-                          <a href={index.link} target='_blank' className='text-decoration-none '>
-                            <div className='skill d-flex flex-column gap-2'>
-                              <div className='d-flex flex-row align-items-center gap-2'>
-                                {index.logo}
-                                <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
-                                  {index.title}
-                                  <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
-                                </h5>
-                              </div>                      
-                              <p>{index.description}</p>
-                            </div>
-                          </a>
-                        </motion.div>
+                        <>
+                          {animateNow && <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 p-2' key={i}>                
+                            <a href={index.link} target='_blank' className='text-decoration-none '>
+                              <div className='skill d-flex flex-column gap-2'>
+                                <div className='d-flex flex-row align-items-center gap-2'>
+                                  {index.logo}
+                                  <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
+                                    {index.title}
+                                    <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
+                                  </h5>
+                                </div>                      
+                                <p>{index.description}</p>
+                              </div>
+                            </a>
+                          </motion.div>}
+                        </>
                       )
                     })
                   }
-                </AnimatePresence>
               </div>        
-            </div>) : (
+            </motion.div>)) : (
             <div className='container-fluid py-2 custom-color-responsiveness ' >
               <div className='heading text-white fs-2 fw-semibold p-3'>
                 Front-End Technologies
@@ -174,7 +201,8 @@ const Skills = () => {
         }
 
         { (formValue === '' || foundBackEndItems.length > 0) ? (
-          <div className='container-fluid py-2 custom-color-responsiveness '>
+          animateNow && (
+          <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{ once: true }} className='container-fluid py-2 custom-color-responsiveness '>
             <div className='heading text-white fs-2 fw-semibold p-3'>
               Full-Stack Foundations
               <p className='fs-5 fw-normal pt-1' style={{backgroundColor:'#1d1d1d', color:'#858585'}}>Currently expanding my skills in backend development to complete the full-stack journey</p>
@@ -183,27 +211,29 @@ const Skills = () => {
             <div className='row row-custom g-4 p-3 skill-section'>
               {
                 (formValue ? foundBackEndItems : backEnd).map((index, i) => {
-                  const fromDir = i % 2 == 0 ? -200 : 200
+                  const fromDir = i % 2 == 0 ? -xDir : xDir
                   return (
-                    <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
-                      <a href={index.link} target='_blank' className='text-decoration-none'>
-                        <div className='skill d-flex flex-column gap-2'>
-                          <div className='d-flex flex-row align-items-center gap-3'>
-                            {index.logo}
-                            <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
-                              {index.title}
-                              <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
-                            </h5>
-                          </div>                      
-                          <p>{index.description}</p>
-                        </div>
-                      </a>
-                    </motion.div>
+                    <>
+                      {animateNow && <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
+                        <a href={index.link} target='_blank' className='text-decoration-none'>
+                          <div className='skill d-flex flex-column gap-2'>
+                            <div className='d-flex flex-row align-items-center gap-3'>
+                              {index.logo}
+                              <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
+                                {index.title}
+                                <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
+                              </h5>
+                            </div>                      
+                            <p>{index.description}</p>
+                          </div>
+                        </a>
+                      </motion.div>}
+                    </>
                   )
                 })
               }
             </div>        
-          </div> ) : (
+          </motion.div>) ) : (
             <div className='container-fluid py-2 custom-color-responsiveness ' >
               <div className='heading text-white fs-2 fw-semibold p-3'>
                 Full-Stack Foundations
@@ -218,7 +248,8 @@ const Skills = () => {
         }
 
         { (formValue === '' || foundDevelopmentEndItems.length > 0) ? (
-          <div className='container-fluid py-2 custom-color-responsiveness '>
+          animateNow && (
+          <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{ once: true }} className='container-fluid py-2 custom-color-responsiveness '>
             <div className='heading text-white fs-2 fw-semibold p-3'>
               Developer Toolkit
               <p className='fs-5 fw-normal pt-1' style={{backgroundColor:'#1d1d1d', color:'#858585'}}>Tools I rely on for efficient development, collaboration, and design workflow</p>
@@ -227,27 +258,29 @@ const Skills = () => {
             <div className='row row-custom g-4 p-3 skill-section'>
               {
                 (formValue ? foundDevelopmentEndItems : developmentTools).map((index, i) => {
-                  const fromDir = i % 2 == 0 ? -200 : 200
+                  const fromDir = i % 2 == 0 ? -xDir : xDir
                   return (
-                    <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
-                      <a href={index.link} target='_blank' className='text-decoration-none'>
-                        <div className='skill d-flex flex-column gap-2'>
-                          <div className='d-flex flex-row align-items-center gap-3'>
-                            {index.logo}
-                            <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
-                              {index.title}
-                              <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
-                            </h5>
-                          </div>                      
-                          <p>{index.description}</p>
-                        </div>
-                      </a>
-                    </motion.div>
+                    <>
+                      {animateNow && <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='col-12 col-lg-6 ' key={i}>                
+                        <a href={index.link} target='_blank' className='text-decoration-none'>
+                          <div className='skill d-flex flex-column gap-2'>
+                            <div className='d-flex flex-row align-items-center gap-3'>
+                              {index.logo}
+                              <h5 className='d-flex flex-row align-items-center gap-1 external-link'>
+                                {index.title}
+                                <svg xmlns="http://www.w3.org/2000/svg"  width="15" height="15" viewBox="0 0 20 20"><g fill="currentColor"><path d="M11 3a1 1 0 1 0 0 2h2.586l-6.293 6.293a1 1 0 1 0 1.414 1.414L15 6.414V9a1 1 0 1 0 2 0V4a1 1 0 0 0-1-1h-5Z"/><path d="M5 5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 0-2 0v3H5V7h3a1 1 0 0 0 0-2H5Z"/></g></svg>
+                              </h5>
+                            </div>                      
+                            <p>{index.description}</p>
+                          </div>
+                        </a>
+                      </motion.div>}
+                    </>
                   )
                 })
               }
             </div>        
-          </div> ) : ( 
+          </motion.div>) ) : ( 
             <div className='container-fluid py-2 custom-color-responsiveness ' >
               <div className='heading text-white fs-2 fw-semibold p-3'>
                 Developer Toolkit
