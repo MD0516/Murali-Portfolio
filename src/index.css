@@ -405,11 +405,11 @@ body {
   content: '';
   position: absolute ;
   left: -2px;
-  top: 100px;
+  top: 50px;
   border: #858585 1px solid;
   background-color: #858585;
   width: 2px;
-  height: 360px;
+  height: 280px;
   }
 
 .timeline-dot {

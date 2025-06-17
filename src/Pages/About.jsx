@@ -73,7 +73,7 @@ const About = () => {
           {animateNow && <motion.div initial={{ opacity: 0, height:0 }} whileInView={{opacity: 1, height: '100%'}} transition={{ duration: 1 }} viewport={{ once: true }} className='timeline'>         
             <ul className=" list-unstyled">
               {events.map((event, index) => (
-                <motion.li initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{ opacity: 0, y: -100}} transition={{ duration: 1, delay: index * .1}} key={index} className="my-5 position-relative">
+                <motion.li initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{ opacity: 0, y: -100}} transition={{ duration: 1, delay: index * .1}} key={index} className="my-2 position-relative">
                   <motion.div initial={{scale: 0}} whileInView={{ scale: 1}} transition={{ duration: .5, type: 'spring', stiffness: 300}} className="timeline-dot"></motion.div>
                   <div className="ms-4">
                     <h5 className="fw-bold">{event.year}</h5>
