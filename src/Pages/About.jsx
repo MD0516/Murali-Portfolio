@@ -88,9 +88,9 @@ const About = () => {
       </motion.div>}
 
       {animateNow && <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2 my-5 custom-color-responsiveness about-footer'>
-          <div className='row'>
+          <div className='row gap-5'>
 
-            <motion.div initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 0.8}} className='col-12 col-md-6 about-footer-card'>
+            <motion.div initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 0.8}} className='col-12 col-md-5 about-footer-card'>
               <div className='about-footer-heading'>
                 <h5 className='fw-semibold'>Have something in mind? Let’s talk</h5>
               </div>
@@ -102,7 +102,7 @@ const About = () => {
               
             </motion.div>
 
-            <motion.div initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 0.8}} className='col-12 col-md-6 about-footer-card'>  
+            <motion.div initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 0.8}} className='col-12 col-md-5 about-footer-card'>  
               <div className='about-footer-heading'>
                 <h5 className='fw-semibold'>Ready to Collaborate? Get My Resume</h5>
               </div>

@@ -466,7 +466,8 @@ body {
 }
 
 .about-footer-card:hover {
-  transform: translateY(-7px);
+  color: #fff;
+  transform: translateY(-7px) !important;
   cursor: pointer;
 }
 
