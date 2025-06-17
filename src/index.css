@@ -389,6 +389,87 @@ body {
   background-color: #858585; 
 }
 
+.about-img {
+  height: 100%;
+}
+
+.about-text {
+  text-align: justify;
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute ;
+  left: -2px;
+  top: 100px;
+  border: #858585 1px solid;
+  background-color: #858585;
+  width: 2px;
+  height: 360px;
+  }
+
+.timeline-dot {
+  content: '';
+  width: 15px;
+  height: 15px;
+  position: absolute ;
+  left: -8px;
+  top: 40px;
+  border: #858585 1px solid;
+  border-radius: 50%;
+  background-color: #858585;
+}
+
+.about-skills a:hover{
+  color: #fff !important;
+}
+
+.about-footer-heading {
+  border: #7c7b7b 1px solid;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  padding: 7px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-footer-link {
+  color:#858585;
+  border: #7c7b7b 1px solid;
+  border-top: none;
+  border-radius: 0 0 7px 7px ;
+  padding: 7px;
+  background-color: #1c1c1c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-footer-link a {
+  color:#858585;
+  background-color: #1c1c1c;
+  transition: all .1s linear;
+}
+
+.about-footer-link:hover a {
+  color: #fff;
+}
+
+.about-footer-card {
+  transition: all .1s linear;
+}
+
+.about-footer-card:hover {
+  transform: translateY(-7px);
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .active {
     width: 110% !important;
