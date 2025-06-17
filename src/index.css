@@ -372,6 +372,23 @@ body {
   border-top: none;
 }
 
+::-webkit-scrollbar {
+  width: 3px; 
+  height: 6px; 
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #858585; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #858585; 
+}
+
 @media (min-width: 768px) {
   .active {
     width: 110% !important;
@@ -388,5 +405,4 @@ body {
   .skill-content {
     margin-left: 20px;
   }
-
 }
