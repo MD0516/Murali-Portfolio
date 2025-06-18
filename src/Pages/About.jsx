@@ -48,13 +48,13 @@ const About = () => {
       <div className='container-fluid py-2  custom-color-responsiveness'>
         <div className='row'>
           {animateNow && <>
-          <motion.div initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 0.8}}  className='col-12 col-md-9 '>
+          <motion.div initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 0.8, ease: 'easeInOut'}}  className='col-12 col-md-9 '>
             <p className='about-text lh-lg'>
               I'm a Front-End developer based in Madipakkam, Chennai, with a passion for building digital experiences. Outside of coding, I enjoy playing cricket, watching series and movies, and listening to music — activities that keep me balanced, focused, and creatively inspired.
             </p>
           </motion.div>
 
-          <motion.div initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 0.8}} className='d-none  col-md-3  d-md-flex justify-content-center align-items-center about-img'>
+          <motion.div initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 0.8, ease: 'easeInOut'}} className='d-none  col-md-3  d-md-flex justify-content-center align-items-center about-img'>
             Image
           </motion.div>
           </>}
