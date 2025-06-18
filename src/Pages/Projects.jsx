@@ -59,7 +59,7 @@ const Projects = () => {
       </AnimatePresence>
       {animateNow && 
       <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2 custom-color-responsiveness'>
-        <div className='row'>
+        <div className='row g-3'>
           {
             projects.map((item, i) => {
               const fromDir = i % 2 == 0 ? -xDir : xDir
@@ -76,7 +76,7 @@ const Projects = () => {
                           <p className='lh-6'>{item.description}</p>                    
                         </div>
 
-                        <div className='tech-stack d-flex gap-3 p-2'>
+                        <div className='tech-stack d-flex flex-wrap gap-3 p-2'>
                           {
                             item.technologies.map((tech, t) => (
                                 <p className='tech-name fw-semibold' key={t}>

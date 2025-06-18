@@ -63,7 +63,7 @@ const About = () => {
 
       { animateNow && <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2  custom-color-responsiveness about-skills'>
         <h3 className='text-white fs-2 fw-bolder'>Expanding My Stack</h3>
-        <p className='lh-lg p-1'>Skilled in front-end technologies and actively upskilling in backend development to become a well-rounded full-stack developer.</p>
+        <p className='lh-lg p-1'>Skilled in front-end technologies and actively up skilling in backend development to become a well-rounded full-stack developer.</p>
         <Link to='/skills' className='text-decoration-none p-1' style={{ color: '#858585' }}>See More...</Link>
       </motion.div>}
 
@@ -73,7 +73,7 @@ const About = () => {
           {animateNow && <motion.div initial={{ opacity: 0, height:0 }} whileInView={{opacity: 1, height: '100%'}} transition={{ duration: 1 }} viewport={{ once: true }} className='timeline'>         
             <ul className=" list-unstyled">
               {events.map((event, index) => (
-                <motion.li initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{ opacity: 0, y: -100}} transition={{ duration: 1, delay: index * .1}} key={index} className="my-2 position-relative">
+                <motion.li initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{ opacity: 0, y: -100}} transition={{ duration: 1, delay: index * .1}} key={index} className={`${ index == 1 ? 'timeline-child' : ''} position-relative`}>
                   <motion.div initial={{scale: 0}} whileInView={{ scale: 1}} transition={{ duration: .5, type: 'spring', stiffness: 300}} className="timeline-dot"></motion.div>
                   <div className="ms-4">
                     <h5 className="fw-bold">{event.year}</h5>
@@ -94,8 +94,8 @@ const About = () => {
               <div className='about-footer-heading'>
                 <h5 className='fw-semibold'>Have something in mind? Let’s talk</h5>
               </div>
-              <div className='about-footer-link'>
-                <Link className='text-decoration-none fw-semibold  d-block'>
+              <div className='about-footer-link-div'>
+                <Link className='text-decoration-none fw-semibold about-footer-link d-block'>
                   Contact Me
                 </Link>
               </div>
@@ -106,8 +106,8 @@ const About = () => {
               <div className='about-footer-heading'>
                 <h5 className='fw-semibold'>Ready to Collaborate? Get My Resume</h5>
               </div>
-              <div className='about-footer-link'>
-                <a href='/Resume.pdf' download='Murali-Dharan-Resume.pdf' target='_blank' rel='noopener noreferrer' className='text-decoration-none fw-semibold  d-block'>
+              <div className='about-footer-link-div'>
+                <a href='/Resume.pdf' download='Murali-Dharan-Resume.pdf' target='_blank' rel='noopener noreferrer' className='text-decoration-none fw-semibold about-footer-link d-block'>
                   Download Resume
                 </a>                
               </div>

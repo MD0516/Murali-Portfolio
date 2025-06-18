@@ -1,5 +1,6 @@
 *{
   background-color: #171717;
+  user-select: none;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
 }
 
 .icon {
-  background-color: #2b2b2b;
+  background-color: transparent;
   transition: all .5s linear;
 }
 
@@ -401,6 +402,10 @@ body {
   position: relative;
 }
 
+.timeline-child {
+  margin: 3rem 0;
+}
+
 .timeline::before {
   content: '';
   position: absolute ;
@@ -409,7 +414,7 @@ body {
   border: #858585 1px solid;
   background-color: #858585;
   width: 2px;
-  height: 280px;
+  height: 380px;
   }
 
 .timeline-dot {
@@ -446,18 +451,20 @@ body {
   border-radius: 0 0 7px 7px ;
   padding: 7px;
   background-color: #1c1c1c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
 }
 
-.about-footer-link a {
+.about-footer-link-div{
+  text-align: center;
+}
+
+.about-footer-link-div a {
   color:#858585;
   background-color: #1c1c1c;
   transition: all .1s linear;
 }
 
-.about-footer-link:hover a {
+.about-footer-link-div:hover a {
   color: #fff;
 }
 
@@ -470,6 +477,104 @@ body {
   transform: translateY(-7px) !important;
   cursor: pointer;
 }
+
+.contact-whatsapp {
+  background-color: #2b2b2b;
+  border: #7c7b7b2a 1px solid;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all .1s linear;
+}
+
+.contact-email {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: #7c7b7b2a 1px solid;
+  cursor: pointer;
+  transition: all .1s linear;
+}
+
+.contact-email svg {
+  background-color: #1c1c1c;
+}
+
+.contact-email:hover {
+  background-color: #1a1a1a;
+}
+
+.contact-whatsapp:hover {
+  background-color: #2a2a2ad0;
+}
+
+.contact-form {
+  background-color: #1c1c1c;
+  border: #7c7b7b2a 1px solid;
+}
+
+.contact-form-title {
+  background-color: #1c1c1c;
+}
+
+.contact-form-tagline {
+  background-color: #1c1c1c;
+}
+
+.form-label {
+  background-color: transparent !important;
+  color: #858585 !important;
+  margin: 0 15px;
+}
+
+.form-input {
+  background-color: #1c1c1c;
+  color: #858585 !important;
+  border: #7c7b7b2a 1px solid; 
+  padding: 0 25px;
+}
+
+.form-input:focus {
+    background-color: #1c1c1c ;
+    color: #858585 !important;
+    border: #7c7b7b2a 1px solid; 
+    box-shadow: 0 0 0 .25rem #7c7b7b2a;    
+}
+
+.form-floating>textarea:focus~label::after {
+  background-color: transparent;
+}
+
+.custom-bg {
+  background-color: #1c1c1c;
+}
+
+.form-textarea {
+  height: 250px !important;
+}
+
+.submit-button {
+  transition: all .2s linear;
+  cursor: pointer;
+  width: fit-content;
+  height: 100%;
+  border-radius: 7px;
+  margin: 0 auto;
+}
+
+.submit-button:hover {
+  color: #fff;
+}
+
+.custom-transparent {
+  background-color: transparent;
+}
+
+.submit-button-active {
+  background-color: #171717 !important;
+  color: #fff;
+}
+
 
 @media (min-width: 768px) {
   .active {
@@ -486,5 +591,9 @@ body {
 
   .skill-content {
     margin-left: 20px;
+  }
+
+  .timeline::before {
+    height: 330px;
   }
 }
