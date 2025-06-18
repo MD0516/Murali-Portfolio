@@ -19,32 +19,59 @@ const Contact = () => {
     console.log('clicked')
   }
 
-    const [xDir, setXDir] = useState(window.innerWidth > 768 ? 200 : 13);
-  
-    useEffect(() => {
-      const handleResize = () => {
-        const isDesktopNow = window.innerWidth > 768;
-        setXDir(isDesktopNow ? 200 : 13);
+  const [xDir, setXDir] = useState(window.innerWidth > 768 ? 200 : 13);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktopNow = window.innerWidth > 768;
+      setXDir(isDesktopNow ? 200 : 13);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const [animateNow, setAnimateNow] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const timeout = setTimeout(() => {
+      setAnimateNow(true);
+    }, 500); 
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const motionPropsPlus = xDir === 200 
+    ? {
+        initial: { opacity: 0, scale: 10 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 10 },
+        transition: { duration: 0.8, ease: 'easeInOut' }
+      }
+    : {
+        initial: { opacity: 0, x: 13 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: 13 },
+        transition: { duration: 0.8, ease: 'easeInOut' }
       };
-  
-      window.addEventListener('resize', handleResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleResize);
+  const motionPropsMinus = xDir === 200 
+    ? {
+        initial: { opacity: 0, scale: 10 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 10 },
+        transition: { duration: 0.8, ease: 'easeInOut' }
+      }
+    : {
+        initial: { opacity: 0, x: -13 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -13 },
+        transition: { duration: 0.8, ease: 'easeInOut' }
       };
-    }, []);
-  
-    const [animateNow, setAnimateNow] = useState(false);
-  
-    useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-  
-      const timeout = setTimeout(() => {
-        setAnimateNow(true);
-      }, 500); 
-  
-      return () => clearTimeout(timeout);
-    }, []);
 
   
   return (
@@ -77,23 +104,23 @@ const Contact = () => {
             <form action="">
               <div className='container g-3 custom-bg'>              
                 <div className='row my-2 custom-bg g-3'>
-                  <motion.div initial={{ opacity: 0, scale: 10}} animate={{ opacity: 1, scale: 1}} exit={{ opacity: 0, scale: 10}} transition={{duration: 0.8, ease: 'easeInOut'}} class="form-floating col-12 col-lg-6 custom-bg">
+                  <motion.div {...motionPropsMinus} class="form-floating col-12 col-lg-6 custom-bg">
                     <input type="text" class="form-control form-input" name="name" id="formId1" placeholder="" />
                     <label for="name" className='form-label fw-bold'>Name</label>
                   </motion.div>
-                  <motion.div initial={{ opacity: 0, scale: 10}} animate={{ opacity: 1, scale: 1}} exit={{ opacity: 0, scale: 10}} transition={{duration: 0.8, ease: 'easeInOut'}} class="form-floating col-12 col-lg-6 custom-bg">
+                  <motion.div {...motionPropsPlus} class="form-floating col-12 col-lg-6 custom-bg">
                     <input type="email" class="form-control form-input" name="email" id="formId2" placeholder="" />
                     <label for="email" className='form-label fw-bold'>E-mail</label>
                   </motion.div>
                 </div>
                 <div  className='row my-2 custom-bg'>
-                  <motion.div initial={{ opacity: 0, scale: 10}} animate={{ opacity: 1, scale: 1}} exit={{ opacity: 0, scale: 10}} transition={{ duration: .8, ease: 'easeInOut'}}  class="form-floating col-12 custom-bg">
+                  <motion.div {...motionPropsMinus}  class="form-floating col-12 custom-bg">
                     <textarea class="form-control form-input form-textarea" name="message" id="formId3" placeholder="" />
                     <label htmlFor="message" className='form-label fw-bold'>Message</label>
                   </motion.div>
                 </div>  
                 <div className='row my-2 custom-bg'>
-                  <motion.div initial={{ opacity: 0, scale: 10}} animate={{ opacity: 1, scale: 1}} exit={{ opacity: 0, scale: 10}} transition={{ duration: .8, ease: 'easeInOut'}} className={`custom-bg col-12 py-2 submit-button ${ isClicked ? 'submit-button-active' : '' }`} onClick={handleClicked}>
+                  <motion.div {...motionPropsPlus} className={`custom-bg col-12 py-2 submit-button ${ isClicked ? 'submit-button-active' : '' }`} onClick={handleClicked}>
                     Send Message
                     <svg xmlns="http://www.w3.org/2000/svg" className='custom-transparent mx-1' width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.76 12H6.832m0 0c0-.275-.057-.55-.17-.808L4.285 5.814c-.76-1.72 1.058-3.442 2.734-2.591L20.8 10.217c1.46.74 1.46 2.826 0 3.566L7.02 20.777c-1.677.851-3.495-.872-2.735-2.591l2.375-5.378A2 2 0 0 0 6.83 12"/></svg>
                   </motion.div>
