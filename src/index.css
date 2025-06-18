@@ -541,8 +541,9 @@ body {
     box-shadow: 0 0 0 .25rem #7c7b7b2a;    
 }
 
-.form-floating>textarea:focus~label::after {
-  background-color: transparent;
+.form-floating>textarea:focus~label::after,
+.form-floating>textarea:not(:placeholder-shown)~label::after  {
+  background-color: transparent !important;
 }
 
 .custom-bg {
@@ -560,6 +561,9 @@ body {
   height: 100%;
   border-radius: 7px;
   margin: 0 auto;
+  outline: none;
+  border: none;
+  color: #858585;
 }
 
 .submit-button:hover {

@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react'
+import emaliJS from '@emailjs/browser'
+import { configDotenv } from 'dotenv';
 
 const Contact = () => {
 
@@ -48,9 +50,9 @@ const Contact = () => {
 
   const motionPropsPlus = xDir === 200 
     ? {
-        initial: { opacity: 0, scale: 10 },
+        initial: { opacity: 0, scale: 5 },
         animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 10 },
+        exit: { opacity: 0, scale: 5 },
         transition: { duration: 0.8, ease: 'easeInOut' }
       }
     : {
@@ -61,9 +63,9 @@ const Contact = () => {
       };
   const motionPropsMinus = xDir === 200 
     ? {
-        initial: { opacity: 0, scale: 10 },
+        initial: { opacity: 0, scale: 5 },
         animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 10 },
+        exit: { opacity: 0, scale: 5 },
         transition: { duration: 0.8, ease: 'easeInOut' }
       }
     : {
@@ -73,6 +75,42 @@ const Contact = () => {
         transition: { duration: 0.8, ease: 'easeInOut' }
       };
 
+  const [ formData, setFormData ] = useState( {
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const handleChange = (e) => {
+    setFormData( (prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { name, email, message } = formData;
+
+    if (!name || !email || !message) {
+      alert('Please fill all fields before submitting.');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://13.203.198.111:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await res.json();
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.log(error);
+      alert('Error Sending Message');
+    }
+  };
   
   return (
     <div className='content-height'>
@@ -101,29 +139,29 @@ const Contact = () => {
               <p className='contact-form-tagline lh-lg fw-semibold'> I’ll get back to you faster than you expect</p>
             </div>
 
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className='container g-3 custom-bg'>              
                 <div className='row my-2 custom-bg g-3'>
-                  <motion.div {...motionPropsMinus} class="form-floating col-12 col-lg-6 custom-bg">
-                    <input type="text" class="form-control form-input" name="name" id="formId1" placeholder="" />
-                    <label for="name" className='form-label fw-bold'>Name</label>
+                  <motion.div {...motionPropsMinus} className="form-floating col-12 col-lg-6 custom-bg">
+                    <input type="text" class="form-control form-input" name="name" id="formId1" placeholder="" onChange={handleChange} />
+                    <label htmlFor="name" className='form-label fw-bold'>Name</label>
                   </motion.div>
-                  <motion.div {...motionPropsPlus} class="form-floating col-12 col-lg-6 custom-bg">
-                    <input type="email" class="form-control form-input" name="email" id="formId2" placeholder="" />
-                    <label for="email" className='form-label fw-bold'>E-mail</label>
+                  <motion.div {...motionPropsPlus} className="form-floating col-12 col-lg-6 custom-bg">
+                    <input type="email" className="form-control form-input" name="email" id="formId2" placeholder="" onChange={handleChange} />
+                    <label htmlFor="email" className='form-label fw-bold'>E-mail</label>
                   </motion.div>
                 </div>
                 <div  className='row my-2 custom-bg'>
-                  <motion.div {...motionPropsMinus}  class="form-floating col-12 custom-bg">
-                    <textarea class="form-control form-input form-textarea" name="message" id="formId3" placeholder="" />
+                  <motion.div {...motionPropsMinus}  className="form-floating col-12 custom-bg">
+                    <textarea className="form-control form-input form-textarea" name="message" id="formId3" placeholder="" onChange={handleChange} />
                     <label htmlFor="message" className='form-label fw-bold'>Message</label>
                   </motion.div>
                 </div>  
                 <div className='row my-2 custom-bg'>
-                  <motion.div {...motionPropsPlus} className={`custom-bg col-12 py-2 submit-button ${ isClicked ? 'submit-button-active' : '' }`} onClick={handleClicked}>
+                  <motion.button type='submit' {...motionPropsPlus} className={`custom-bg col-12 py-2 submit-button ${isClicked ? 'submit-button-active' : ''} `} onClick={handleClicked} >
                     Send Message
                     <svg xmlns="http://www.w3.org/2000/svg" className='custom-transparent mx-1' width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.76 12H6.832m0 0c0-.275-.057-.55-.17-.808L4.285 5.814c-.76-1.72 1.058-3.442 2.734-2.591L20.8 10.217c1.46.74 1.46 2.826 0 3.566L7.02 20.777c-1.677.851-3.495-.872-2.735-2.591l2.375-5.378A2 2 0 0 0 6.83 12"/></svg>
-                  </motion.div>
+                  </motion.button>
                 </div>          
               </div>
             </form>
