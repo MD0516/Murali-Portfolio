@@ -1,7 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react'
-import emaliJS from '@emailjs/browser'
-import { configDotenv } from 'dotenv';
 
 const Contact = () => {
 
