@@ -97,7 +97,7 @@ const Contact = () => {
     }
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://00d6-13-203-198-111.ngrok-free.app/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
