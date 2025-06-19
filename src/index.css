@@ -392,6 +392,12 @@ body {
 
 .about-img {
   height: 100%;
+  border-radius: 7px;
+}
+
+.about-img img {
+  width: 100%;
+  border-radius: 7px;
 }
 
 .about-text {

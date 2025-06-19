@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import dp from '/Image/DP.webp?url'
 
 const About = () => {
   const events = [
@@ -48,14 +49,14 @@ const About = () => {
       <div className='container-fluid py-2  custom-color-responsiveness'>
         <div className='row'>
           {animateNow && <>
-          <motion.div initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 0.8, ease: 'easeInOut'}}  className='col-12 col-md-9 '>
-            <p className='about-text lh-lg'>
-              I'm a Front-End developer based in Madipakkam, Chennai, with a passion for building digital experiences. Outside of coding, I enjoy playing cricket, watching series and movies, and listening to music — activities that keep me balanced, focused, and creatively inspired.
-            </p>
-          </motion.div>
-
-          <motion.div initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 0.8, ease: 'easeInOut'}} className='d-none  col-md-3  d-md-flex justify-content-center align-items-center about-img'>
-            Image
+          <motion.div initial={{opacity: 0, y: xDir}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: xDir}} transition={{duration: 0.8, ease: 'easeInOut'}}  className='col-12  '>
+            <motion.p initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 1, ease: 'easeInOut'}} className='about-text lh-lg'>
+              I'm a Front-End developer based in Madipakkam, Chennai, with a passion for building digital experiences. Outside of coding, I enjoy playing cricket, watching series and movies, and listening to music — activities that keep me balanced, focused, and creatively inspired. 
+            </motion.p> 
+            <motion.p initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 1, ease: 'easeInOut'}} className='about-text lh-lg'>
+              Beyond the technical skills, I take pride in being a keen observer and an eager learner, always looking for better ways to solve problems and refine my craft. 
+              Whether it’s writing clean code or collaborating with a team, I aim to add clarity, creativity, and impact to every project I work on.
+            </motion.p>
           </motion.div>
           </>}
         </div>
@@ -63,7 +64,7 @@ const About = () => {
 
       { animateNow && <motion.div initial={{opacity: 0, y:200}} whileInView={{opacity:1, y:0}} exit={{opacity:0, y:200}} transition={{duration:.8, ease: 'easeInOut'}} viewport={{once: true}} className='container-fluid py-2  custom-color-responsiveness about-skills'>
         <h3 className='text-white fs-2 fw-bolder'>Expanding My Stack</h3>
-        <p className='lh-lg p-1'>Skilled in front-end technologies and actively up skilling in backend development to become a well-rounded full-stack developer.</p>
+        <p className='lh-lg p-1'>I'm currently deepening my knowledge in backend development by exploring advanced Node.js concepts and building RESTful APIs. I'm also learning how to integrate MongoDB for handling data efficiently and working on deploying full-stack applications using AWS to better understand real-world hosting environments.</p>
         <Link to='/skills' className='text-decoration-none p-1' style={{ color: '#858585' }}>See More...</Link>
       </motion.div>}
 
