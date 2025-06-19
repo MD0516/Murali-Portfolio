@@ -18,7 +18,7 @@ const Sidebar = () => {
       <motion.div key='sidebar-text' initial={{width: '280'}} animate={{ width : toggleSidebar ? 70 : 280}} exit={{width: 70}} transition={{duration: .5, ease: 'easeInOut'}} className={`d-flex flex-column gap-3 align-items-center p-4 position-fixed sidebar `} style={{zIndex: 998}}  >
         
         <AnimatePresence> <motion.div initial= {{scale: 0.8, opacity: 0}} animate={{width: toggleSidebar ? 40 : 200, height: toggleSidebar ? 40 : 200, scale: 1, opacity: 1}} exit= {{scale: 0.8, opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut' }} className='rounded-circle bg-white d-flex justify-content-center align-items-center dp' >
-            <img src={dp} alt="profile-pic" />
+            <motion.img animate={{left: !toggleSidebar ? '23px' : ''}} transition={{ duration: .8, ease: 'easeInOut'}} src={dp} alt="profile-pic"  />
           </motion.div> </AnimatePresence>
         <AnimatePresence>
           { !toggleSidebar && (

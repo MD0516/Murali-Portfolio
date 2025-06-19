@@ -610,6 +610,7 @@ body {
   image-rendering: auto;
   top: .3px;
   left: 5px;
+  transition: all .8 ease-in-out;
 }
 
 
@@ -640,5 +641,6 @@ body {
     width: 75%;
     image-rendering: auto;
     top: .3px;
+    transition: all .8 ease-in-out;
   }
 }
