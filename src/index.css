@@ -598,6 +598,20 @@ body {
   margin: 0;
 }
 
+.dp {
+  overflow: hidden;
+  position: relative;
+}
+
+.dp img {
+  object-fit: cover;
+  position: absolute;
+  width: 75%;
+  image-rendering: auto;
+  top: .3px;
+  left: 5px;
+}
+
 
 @media (min-width: 768px) {
   .active {
@@ -618,5 +632,13 @@ body {
 
   .timeline::before {
     height: 330px;
+  }
+
+  .dp img {
+    object-fit: cover;
+    position: absolute;
+    width: 75%;
+    image-rendering: auto;
+    top: .3px;
   }
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion';
-import { style } from 'framer-motion/client';
+import dp from '/Image/DP.webp?url'
 
 const Sidebar = () => {
   const location = useLocation();
@@ -17,7 +17,9 @@ const Sidebar = () => {
     <>
       <motion.div key='sidebar-text' initial={{width: '280'}} animate={{ width : toggleSidebar ? 70 : 280}} exit={{width: 70}} transition={{duration: .5, ease: 'easeInOut'}} className={`d-flex flex-column gap-3 align-items-center p-4 position-fixed sidebar `} style={{zIndex: 998}}  >
         
-        <AnimatePresence> <motion.div initial= {{scale: 0.8, opacity: 0}} animate={{width: toggleSidebar ? 40 : 200, height: toggleSidebar ? 40 : 200, scale: 1, opacity: 1}} exit= {{scale: 0.8, opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut' }} className='rounded-circle bg-white d-flex justify-content-center align-items-center' ></motion.div> </AnimatePresence>
+        <AnimatePresence> <motion.div initial= {{scale: 0.8, opacity: 0}} animate={{width: toggleSidebar ? 40 : 200, height: toggleSidebar ? 40 : 200, scale: 1, opacity: 1}} exit= {{scale: 0.8, opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut' }} className='rounded-circle bg-white d-flex justify-content-center align-items-center dp' >
+            <img src={dp} alt="profile-pic" />
+          </motion.div> </AnimatePresence>
         <AnimatePresence>
           { !toggleSidebar && (
             <motion.div initial={{ opacity: 0, visibility: 'none', x: -200 }} animate={{ opacity: 1,visibility: 'visible' , x: 0 }} exit={{ opacity: 0,  visibility: 'none', x: -200  }} transition={{ duration: 0.5 }} key='sidebar-text'  className='text-white text-center'>
