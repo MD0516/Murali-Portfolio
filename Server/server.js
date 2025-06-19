@@ -20,6 +20,8 @@ app.post('/api/contact', async (req, res) => {
   try {
     await sendMailToUser( name, email );
     await sendMailToCompany( name, email, message );
+
+    res.status(200).send({ success: true, message: "Emails sent successfully" });
   } catch (err) {
     console.error("Email error:", err);
     res.status(500).send({ success: false, error: err.message });
