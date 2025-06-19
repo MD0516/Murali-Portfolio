@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import ite from '../Assets/Screenshots/ITE.png'
-import arkfa from '../Assets/Screenshots/ARKFA.png'
+import ite from '../Assets/Screenshots/ITE.webp'
+import arkfa from '../Assets/Screenshots/ARKFA.webp'
 
 const Projects = () => {
 
@@ -67,7 +67,7 @@ const Projects = () => {
                   <>
                     {animateNow && <motion.div initial={{opacity: 0, x: fromDir}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: i * 0.1, ease: 'easeInOut'}} viewport={{once: true}} className='project-card col-12 col-md-6 ' key={i}>
                       <div className='project-img d-flex align-items-center justify-content-center'>
-                        <img src={item.logo} alt={item.title}  />
+                        <img src={item.logo} alt={item.title} loading='lazy' />
                       </div>
 
                       <div className='project-description'>
