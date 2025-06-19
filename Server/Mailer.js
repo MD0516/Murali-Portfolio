@@ -67,7 +67,6 @@ export async function sendMailToUser(name, email) {
 </head>
 <body>
   <div class="email-container">
-    <h2>Thanks for reaching out!</h2>
     <p>Hi ${name},</p>
     <p>Thanks for your message. I’ve received your inquiry and will get back to you as soon as possible.</p>
     <p>If your message is urgent, feel free to contact me directly on <a href="https://wa.me/919941161100?text=Hi%20Murali%2C%20I%20came%20across%20your%20portfolio%20and%20I'm%20interested%20in%20your%20work.%20Can%20we%20talk%3F" class="whatsapp-link" target="_blank">WhatsApp</a>.</p>
