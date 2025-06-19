@@ -102,7 +102,11 @@ const Contact = () => {
         body: JSON.stringify(formData)
       });
       const result = await res.json();
-      alert('Message sent successfully!');
+
+      if ( result ) {
+        alert('Message sent successfully!');
+      }
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.log(error);
       alert('Error Sending Message');
