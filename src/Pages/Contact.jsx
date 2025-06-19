@@ -101,11 +101,6 @@ const Contact = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      const result = await res.json();
-
-      if ( result ) {
-        alert('Message sent successfully!');
-      }
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.log(error);
@@ -144,17 +139,17 @@ const Contact = () => {
               <div className='container g-3 custom-bg'>              
                 <div className='row my-2 custom-bg g-3'>
                   <motion.div {...motionPropsMinus} className="form-floating col-12 col-lg-6 custom-bg">
-                    <input type="text" class="form-control form-input" name="name" id="formId1" placeholder="" onChange={handleChange} />
+                    <input type="text" class="form-control form-input" name="name" id="formId1" value={formData.name} placeholder="" onChange={handleChange} />
                     <label htmlFor="name" className='form-label fw-bold'>Name</label>
                   </motion.div>
                   <motion.div {...motionPropsPlus} className="form-floating col-12 col-lg-6 custom-bg">
-                    <input type="email" className="form-control form-input" name="email" id="formId2" placeholder="" onChange={handleChange} />
+                    <input type="email" className="form-control form-input" name="email" id="formId2" value={formData.email} placeholder="" onChange={handleChange} />
                     <label htmlFor="email" className='form-label fw-bold'>E-mail</label>
                   </motion.div>
                 </div>
                 <div  className='row my-2 custom-bg'>
                   <motion.div {...motionPropsMinus}  className="form-floating col-12 custom-bg">
-                    <textarea className="form-control form-input form-textarea" name="message" id="formId3" placeholder="" onChange={handleChange} />
+                    <textarea className="form-control form-input form-textarea" name="message" id="formId3" value={formData.message} placeholder="" onChange={handleChange} />
                     <label htmlFor="message" className='form-label fw-bold'>Message</label>
                   </motion.div>
                 </div>  
