@@ -101,7 +101,12 @@ const Contact = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      setFormData({ name: '', email: '', message: '' });
+
+      if (res.ok){
+        alert('Message sent Successfully')
+        setFormData({ name: '', email: '', message: '' });
+      }
+      
     } catch (error) {
       console.log(error);
       alert('Error Sending Message');
