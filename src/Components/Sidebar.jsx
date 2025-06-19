@@ -29,7 +29,7 @@ const Sidebar = () => {
 
         <AnimatePresence >
           { !toggleSidebar &&(
-            <motion.div key={toggleSidebar ? 'collapsed' : 'expanded'} initial={{ opacity:0,visibility: 'none' , x: -100 }} animate={{ opacity: 1, visibility: 'visible', x: 0 }} exit={{ opacity: 0,visibility: 'none', x:-100 }} transition={{ duration: 0.2 }} className='d-flex gap-3 custom-hover'>
+            <motion.div key={toggleSidebar ? 'collapsed' : 'expanded'} initial={{ opacity:0,visibility: 'none' , x: -100 }} animate={{ opacity: 1, visibility: 'visible', x: 0 }} exit={{ opacity: 0,visibility: 'none', x:-100 }} transition={{ duration: 0.2 }} className='d-flex align-items-center gap-3 custom-hover'>
               <a href="https://github.com/MD0516" target='_blank' rel="noopener noreferrer" style={{color: '#858585'}}>
                 <i className='bi bi-github fs-4 '></i>
               </a>
@@ -42,6 +42,9 @@ const Sidebar = () => {
               <a href="https://wa.me/919941161100?text=Hi%20Murali%2C%20I%20came%20across%20your%20portfolio%20and%20I'm%20interested%20in%20your%20work.%20Can%20we%20talk%3F" target='_blank' rel="noopener noreferrer" style={{color: '#858585'}}>
                 <i className='bi bi-whatsapp fs-4'></i>
               </a>
+              <a href='/Resume.pdf' download='Murali-Dharan-Resume.pdf' target='_blank' className='text-decoration-none resume-download' style={{color: '#858585'}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 14"><path fill="currentColor" fill-rule="evenodd" d="M1.44.44A1.5 1.5 0 0 1 2.5 0h6a.5.5 0 0 1 .354.146l4 4A.5.5 0 0 1 13 4.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 12.5v-11c0-.398.158-.78.44-1.06m5.747 10.502l.104-.104c.116-.076.216-.176.292-.292l1.854-1.854a.625.625 0 0 0-.442-1.067h-1.25V4a1 1 0 0 0-2 0v3.625h-1.25a.625.625 0 0 0-.442 1.067l1.854 1.854c.076.116.176.216.292.292l.104.104a.625.625 0 0 0 .884 0" clip-rule="evenodd"/></svg>
+              </a> 
             </motion.div>)
           }
         </AnimatePresence>

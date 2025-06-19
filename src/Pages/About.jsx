@@ -107,7 +107,7 @@ const About = () => {
                 <h5 className='fw-semibold'>Ready to Collaborate? Get My Resume</h5>
               </div>
               <div className='about-footer-link-div'>
-                <a href='/Resume.pdf' download='Murali-Dharan-Resume.pdf' target='_blank' rel='noopener noreferrer' className='text-decoration-none fw-semibold about-footer-link d-block'>
+                <a href='/Resume.pdf' download='Murali-Dharan-Resume.pdf' className='text-decoration-none fw-semibold about-footer-link d-block'>
                   Download Resume
                 </a>                
               </div>
