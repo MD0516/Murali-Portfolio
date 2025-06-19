@@ -577,6 +577,7 @@ body {
 .submit-button-active {
   background-color: #171717 !important;
   color: #fff;
+  scale: .9;
 }
 
 

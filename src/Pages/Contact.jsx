@@ -16,7 +16,6 @@ const Contact = () => {
   const handleClicked = () => {
     setIsClicked(true)
     setTimeout(() => setIsClicked(false), 500)
-    console.log('clicked')
   }
 
   const [xDir, setXDir] = useState(window.innerWidth > 768 ? 200 : 13);
@@ -97,7 +96,7 @@ const Contact = () => {
     }
 
     try {
-      const res = await fetch('https://smtp-server-s4rq.onrender.com/api/contact', {
+      const res = await fetch('https://00d6-13-203-198-111.ngrok-free.app/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
