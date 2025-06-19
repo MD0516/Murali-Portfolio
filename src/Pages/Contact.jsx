@@ -169,7 +169,7 @@ const Contact = () => {
                   <motion.button type='submit' {...motionPropsPlus} className={`custom-bg col-12 py-2 submit-button ${isClicked ? 'submit-button-active' : ''}`} onClick={handleClicked} >
                     <div className='d-flex custom-bg'>
                       {isSubmitted ?(
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className='text-success fw-semibold'>
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className='text-success fw-semibold custom-bg'>
                           ✅ Sent!
                         </motion.div>
                       ) : isSubmitting ? (
