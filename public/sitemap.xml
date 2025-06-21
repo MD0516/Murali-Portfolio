@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/</loc>
-  </url>
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/explore</loc>
-  </url>
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/projects</loc>
-  </url>
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/skills</loc>
-  </url>
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/about</loc>
-  </url>
-  <url>
-    <loc>https://murali-portfolio-amber.vercel.app/contact</loc>
-  </url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/</loc></url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/explore</loc></url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/projects</loc></url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/skills</loc></url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/about</loc></url>
+  <url><loc>https://murali-portfolio-amber.vercel.app/contact</loc></url>
 </urlset>
