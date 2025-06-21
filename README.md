@@ -1,12 +1,24 @@
-# React + Vite
+# 💼 Murali Dharan – Frontend Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal portfolio website! This site is built with **React**, **Vite**, and styled using **Bootstrap**. It showcases my projects, frontend skills, and contact details — all in a responsive layout.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fully responsive design (Bootstrap-powered)
+- Clean sidebar navigation
+- Sections: Explore, Skills, Projects, About, and Contact
+- SEO optimized (meta tags, Open Graph)
+- Deployed on **Vercel**
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- Bootstrap
+- React Router DOM
+- Framer Motion (if used)
+- Node.js (if used for backend or mailer)
+
+## 🌐 Live Demo
+
+👉 https://murali-portfolio-amber.vercel.app
