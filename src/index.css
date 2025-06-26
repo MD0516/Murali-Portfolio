@@ -619,6 +619,87 @@ body {
   transition: all .8 ease-in-out;
 }
 
+.mobile-popup {
+  width: fit-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  border: #7c7b7b2a 1px solid;
+  border-radius: 7px;
+  background-color: #1c1c1c;
+  z-index: 10000;
+  font-size: 1.2rem;
+}
+
+.popup-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #cfcfcf85;
+  backdrop-filter: blur(5px) !important;
+}
+
+.close,
+.close svg {
+  background-color: transparent !important;
+}
+
+.mobile-menu ,
+.mobile-menu svg {
+  background-color: transparent !important;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  color: #fff;
+}
+
+.mobile-menu-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  z-index: 9998;
+  background-color: #171717;
+  backdrop-filter: blur(5px) !important;
+}
+
+.mobile-links a span {
+  padding: 0 1rem;
+}
+
+.mobile-links a {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-close {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+}
+
+.custom-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  z-index: 9998;
+  background-color: #1717170e;
+  backdrop-filter: blur(5px) !important;
+}
 
 @media (min-width: 768px) {
   .active {
