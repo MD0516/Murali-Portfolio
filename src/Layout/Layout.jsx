@@ -66,6 +66,14 @@ const Layout = () => {
 
   const [ clicked, setClicked ] = useState(false);
 
+  useEffect(() => {
+    if ( clicked ) {
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+    } else {
+      document.body.style.overflow = 'auto'; // Allow scrolling when popup is closed
+    }
+  }, [clicked]);
+
   return (
     <>
       <LoadingBar color='#7c7b7b' ref={ref} height={2} background='transparent' shadow={false} />
