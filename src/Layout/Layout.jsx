@@ -64,7 +64,7 @@ const Layout = () => {
     }
   }, [atLoad]);
 
-  const [ clicked, setClicked ] = useState(true);
+  const [ clicked, setClicked ] = useState(false);
 
   return (
     <>
