@@ -58,9 +58,9 @@ const Layout = () => {
 
   useEffect(() => {
     if ( atLoad ) {
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'; // Allow scrolling when popup is closed
+      document.body.style.overflow = 'auto'; 
     }
   }, [atLoad]);
 
@@ -68,9 +68,9 @@ const Layout = () => {
 
   useEffect(() => {
     if ( clicked ) {
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'; // Allow scrolling when popup is closed
+      document.body.style.overflow = 'auto';
     }
   }, [clicked]);
 
