@@ -16,7 +16,7 @@ export const StateProvider = ({ children }) => {
 
         if (toggleSidebar) {
             setTimeout(() => setActiveGrow(true), 250);
-            setTimeout(() => setShowText(true), 50);
+            setTimeout(() => setShowText(true), 200);
         } else {
             setActiveGrow(false);
             setShowText(false);
