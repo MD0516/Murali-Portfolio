@@ -111,10 +111,37 @@ const Layout = () => {
           {isMobile && <MobileNav />}
         </div>
       </div>
-      {atLoad && isMobile && <div className='popup-open ' onClick={() => setAtLoad(false)}>
-        <div className="close"><svg xmlns="http://www.w3.org/2000/svg" className='' width="48" height="48" viewBox="0 0 24 24"><path fill="" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" /></svg></div>
-      </div>}
-      {atLoad && isMobile && <div className='mobile-popup custom-color-responsiveness p-5 fw-bold'>Please switch to desktop for the best experience</div>}
+      {atLoad && isMobile &&
+        <div className='custom-modal-overlay' onClick={() => setAtLoad(false)}>
+          <div className='custom-alert-content' onClick={(e) => e.stopPropagation()}>
+            <div className="custom-alert-header">
+              <button
+                type="button"
+                className="custom-close-btn"
+                onClick={() => setAtLoad(false)}
+                aria-label="Close"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className='custom-alert-body text-center'>
+              <div className="custom-alert-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 16 16" fill="currentColor"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="8" cy="8" r="6.25" /><path d="M8 5.25v0m0 6v-3.5" /></g></svg>
+              </div>
+              <h5 className='custom-alert-title'>Switch to desktop for better experience.</h5>
+            </div>
+          </div>
+        </div>
+      }
       {clicked && isMobile &&
         <>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.1, ease: 'linear' }} className='custom-blur' onClick={() => setClicked(false)} ></motion.div>
