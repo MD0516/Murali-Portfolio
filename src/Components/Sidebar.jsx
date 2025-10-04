@@ -148,6 +148,7 @@ const Sidebar = () => {
       </motion.div>
 
       <motion.div key='sidebar-toggle'
+        initial={{ left: 235}}
         animate={{ rotate: toggleSidebar ? 180 : 0, left: toggleSidebar ? 60 : 235 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         className={` d-flex justify-content-center align-items-center text-white position-fixed toggle-button`}

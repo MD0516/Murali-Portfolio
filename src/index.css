@@ -724,4 +724,136 @@ body {
   }
 
 }
+/* Custom Alert Modal Styles */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(23, 23, 23, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
+.custom-alert-content {
+  background-color: #1c1c1c;
+  border: 1px solid #7c7b7b2a;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+  animation: custom-modal-appear 0.3s ease-out;
+}
+
+@keyframes custom-modal-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.custom-alert-header {
+  background-color: transparent;
+  border-bottom: 1px solid #7c7b7b2a;
+  padding: 1rem 1rem 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-close-btn {
+  background: transparent;
+  border: none;
+  color: #858585;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.1s linear;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-close-btn:hover {
+  background-color: #2b2b2b;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.custom-close-btn svg {
+  background-color: transparent;
+}
+
+.custom-alert-body {
+  background-color: transparent;
+  padding: 1.5rem 2rem 2rem;
+}
+
+.custom-alert-icon {
+  background-color: transparent;
+  color: #858585;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-alert-icon svg {
+  background-color: transparent;
+}
+
+.custom-alert-title {
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.custom-alert-button {
+  background-color: #2b2b2b;
+  color: #858585;
+  border: 1px solid #7c7b7b2a;
+  border-radius: 7px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: all 0.1 linear;
+  min-width: 100px;
+  cursor: pointer;
+}
+
+.custom-alert-button:hover {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 1px solid #fff;
+  transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .custom-alert-content {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+  
+  .custom-alert-body {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+  
+  .custom-alert-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .custom-alert-title {
+    font-size: 1rem;
+  }
+}
