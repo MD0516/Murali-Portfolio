@@ -56,7 +56,7 @@ const Explore = () => {
         {animateNow && <motion.div initial={{opacity: 0, y:-400}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-400}} transition={{duration:.8, ease: 'easeInOut'}} className="container-fluid py-2  custom-color-responsiveness" >
           <div className='row text-white'>
             <h1 className=''>Hi, I'm Murali Dharan</h1>
-            <h2><TypingText text={'Front End Developer'} speed={70} /></h2> 
+            <h2><TypingText text={'Full Stack Developer'} speed={70} /></h2> 
           </div>
           <div className='row'>
             <p className='intro fw-semibold '>

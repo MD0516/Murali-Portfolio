@@ -23,7 +23,6 @@ body {
 
 .nav a:hover{
   color: white;
-  scale: 1.12;
 }
 
 .nav a svg {
@@ -606,7 +605,10 @@ body {
 
 .dp {
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  left: 16px;
+  top: 30px;
+  z-index: 999;
 }
 
 .dp img {
@@ -615,7 +617,6 @@ body {
   width: 75%;
   image-rendering: auto;
   top: .3px;
-  left: 5px;
   transition: all .8 ease-in-out;
 }
 
@@ -722,12 +723,5 @@ body {
     height: 330px;
   }
 
-  .dp img {
-    object-fit: cover;
-    position: absolute;
-    width: 75%;
-    image-rendering: auto;
-    top: .3px;
-    transition: all .8 ease-in-out;
-  }
 }
+

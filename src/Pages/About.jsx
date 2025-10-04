@@ -7,7 +7,7 @@ const About = () => {
   const events = [
     { year: '2022-2025', title: 'B.Com Computer Application', desc: 'Graduated from Hindustan College of Arts & Science' },
     { year: 'Jan 2025 - May 2025', title: 'Full Stack Development', desc: 'Completed Full Stack Development at Fita Academy' },
-    { year: 'June 2025 - Present', title: 'Intern Front-End Developer', desc: 'Currently working as a Front-End Intern Developer at ARKFA' },
+    { year: 'June 2025 - Present', title: 'Intern Full-Stack Developer', desc: 'Currently working as a Full-Stack Intern Developer at ARKFA' },
   ];
 
     const [xDir, setXDir] = useState(window.innerWidth > 768 ? 200 : 13);
@@ -51,7 +51,7 @@ const About = () => {
           {animateNow && <>
           <motion.div initial={{opacity: 0, y: xDir}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: xDir}} transition={{duration: 0.8, ease: 'easeInOut'}}  className='col-12  '>
             <motion.p initial={{opacity: 0, x: -xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: -xDir}} transition={{duration: 1, ease: 'easeInOut'}} className='about-text lh-lg'>
-              I'm a Front-End developer based in Madipakkam, Chennai, with a passion for building digital experiences. Outside of coding, I enjoy playing cricket, watching series and movies, and listening to music — activities that keep me balanced, focused, and creatively inspired. 
+              I'm a Full Stack developer based in Madipakkam, Chennai, with a passion for building digital experiences. Outside of coding, I enjoy playing cricket, watching series and movies, and listening to music — activities that keep me balanced, focused, and creatively inspired. 
             </motion.p> 
             <motion.p initial={{opacity: 0, x: xDir}} animate={{opacity: 1, x: 0}} exit={{opacity: 0, x: xDir}} transition={{duration: 1, ease: 'easeInOut'}} className='about-text lh-lg'>
               Beyond the technical skills, I take pride in being a keen observer and an eager learner, always looking for better ways to solve problems and refine my craft. 

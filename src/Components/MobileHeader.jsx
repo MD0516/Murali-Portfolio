@@ -9,7 +9,7 @@ const MobileHeader = () => {
             </div>
             <div className='px-2'>
                 <p className='fw-semibold fs-5'>Murali Dharan</p>            
-                <p className=''>Front-End Developer</p>
+                <p className=''>Full-Stack Developer</p>
             </div>            
         </div>
     </div>
