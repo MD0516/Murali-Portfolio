@@ -8,7 +8,7 @@ const MobileNav = () => {
   return (
     <div>
       <div className='d-flex justify-content-center align-items-center gap-3 mobile-nav ' >
-        <Link to='/explore' className={`${current === 'explore' || current === '' ? 'mobile-active' : ''} d-flex flex-column gap-1 justify-content-center align-items-center`} onClick={window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <Link to='/explore' className={`${current === '' || "explore" || current === '' ? 'mobile-active' : ''} d-flex flex-column gap-1 justify-content-center align-items-center`} onClick={window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className={current === 'explore' || current === '' ? 'icon' : ''} viewBox="0 0 24 24"><path fill="currentColor" d="M6.5 17.5L14 14l3.5-7.5L10 10l-3.5 7.5ZM12 13q-.425 0-.713-.288T11 12q0-.425.288-.713T12 11q.425 0 .713.288T13 12q0 .425-.288.713T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z" /></svg>
           Explore
         </Link>
