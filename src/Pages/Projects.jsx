@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProjectDetails from '../Components/Project/ProjectDetails'
 import { Edit2, Inbox, Trash2, TriangleAlert } from 'lucide-react'
@@ -93,6 +93,170 @@ const ProjectCard = React.memo(function ProjectCard({
         </div>
     )
 })
+
+const Loader = () => {
+    const shapes = useMemo(() => ["square", "pentagon", "diamond", "cross", "octagon"], []);
+    const [currentShape, setCurrentShape] = useState(0);
+    const [animationCycle, setAnimationCycle] = useState(0);
+    const SPEED = useRef(1.5);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentShape(prev => (prev + 1) % shapes.length);
+        }, 600 * SPEED.current);
+
+        return () => clearInterval(interval);
+    }, [shapes.length]);
+
+    // Reset animation cycle every 3 seconds
+    useEffect(() => {
+        const waveInterval = setInterval(() => {
+            setAnimationCycle(prev => prev + 1);
+        }, 3000);
+
+        return () => clearInterval(waveInterval);
+    }, []);
+
+    const textChars = useMemo(() => "Loading Projects".split(""), []);
+
+    // Single animation sequence for text wave
+    const textContainer = {
+        animate: {
+            transition: {
+                staggerChildren: 0.08,
+                repeat: Infinity,
+                repeatDelay: 1.5,
+            }
+        }
+    };
+
+    const letterAnimation = {
+        initial: {
+            y: 0,
+            color: "#7a7a7a"
+        },
+        animate: {
+            y: [0, -4, 0],
+            color: ["#7a7a7a", "#ffffff", "#7a7a7a"],
+            transition: {
+                duration: 0.6,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 1.5
+            }
+        }
+    };
+
+    // Dot animation - starts after text wave completes
+    const dotAnimation = (index) => ({
+        initial: {
+            y: 0,
+            color: "#7a7a7a",
+            opacity: 0.6
+        },
+        animate: {
+            y: [0, -8, 0],
+            color: ["#7a7a7a", "#ffffff", "#7a7a7a"],
+            opacity: [0.6, 1, 0.6],
+            transition: {
+                duration: 0.8,
+                delay: 1.92 + (index * 0.15), // Total text animation time = 16 chars * 0.08 = 1.28s + buffer
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 1.5 - (index * 0.15) // Adjust to sync with text
+            }
+        }
+    });
+
+    return (
+        <div className="d-flex flex-column justify-content-center align-items-center p-4">
+            <div className='token-verification-container'>
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        key={shapes[currentShape]}
+                        initial={{
+                            opacity: 0,
+                            x: "20%",
+                            y: "-50%",
+                            rotate: -90,
+                            scale: .85
+                        }}
+                        animate={{
+                            opacity: 1,
+                            x: "-50%",
+                            y: "-50%",
+                            rotate: 90,
+                            scale: 1,
+                            backgroundColor: ["#9f9f9f", "#7a7a7a", "#c0c0c0", "#9f9f9f"],
+                            transition: {
+                                x: { duration: 0.4, ease: "easeOut" },
+                                opacity: { duration: 0.3 },
+                                rotate: {
+                                    repeat: Infinity,
+                                    duration: 1.5 * SPEED.current,
+                                    ease: "linear"
+                                },
+                                backgroundColor: {
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }
+                            }
+                        }}
+                        exit={{
+                            opacity: 0,
+                            x: "-100%",
+                            y: "-50%",
+                            rotate: 90,
+                            scale: .85,
+                            transition: { duration: 0.25, ease: "easeIn" }
+                        }}
+                        className={`shape ${shapes[currentShape]}`}
+                    />
+                </AnimatePresence>
+            </div>
+
+            <div className="text-center mt-4">
+                <motion.div
+                    className="fs-3 fw-bold d-inline-block"
+                    key={animationCycle}
+                    variants={textContainer}
+                    initial="initial"
+                    animate="animate"
+                >
+                    {textChars.map((char, i) => (
+                        <motion.span
+                            key={`${animationCycle}-${i}`}
+                            variants={letterAnimation}
+                            style={{
+                                display: "inline-block",
+                                marginRight: char === " " ? "4px" : "0"
+                            }}
+                        >
+                            {char}
+                        </motion.span>
+                    ))}
+                </motion.div>
+
+                <span className="fs-3 fw-bold ms-2" style={{ letterSpacing: "2px" }}>
+                    {[0, 1, 2].map((i) => (
+                        <motion.span
+                            key={`dot-${animationCycle}-${i}`}
+                            initial="initial"
+                            animate="animate"
+                            variants={dotAnimation(i)}
+                            style={{
+                                display: "inline-block",
+                            }}
+                        >
+                            .
+                        </motion.span>
+                    ))}
+                </span>
+            </div>
+        </div>
+    );
+};
 
 const ConfirmModal = ({ isOpen, onClose, project, dispatch }) => {
     if (!isOpen) return null
@@ -200,7 +364,7 @@ const Projects = () => {
 
     if (loading) {
         return (
-            <div>Loading....</div>
+            <Loader />
         )
     }
 
