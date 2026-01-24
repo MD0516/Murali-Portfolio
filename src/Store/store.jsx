@@ -11,5 +11,5 @@ export const store = configureStore({
         feedbacks: feedbackSlice,
         contact: contactSlice
     },
-    // devTools: false
+    devTools: false
 })
