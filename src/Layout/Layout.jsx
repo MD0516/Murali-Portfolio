@@ -99,7 +99,7 @@ const Layout = () => {
     if (isProjectsPage && (value === null || value === "true")) {
       Toast.info("How to view project details", "Click on any project card to see more information", 5300, 1.3)
     }
-  }, [])
+  }, [location.pathname])
 
   return (
     <>
