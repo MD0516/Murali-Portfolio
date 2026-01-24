@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence, easeInOut } from 'framer-motion'
-import { link } from 'framer-motion/client';
+import { motion, AnimatePresence } from 'framer-motion'
 
 const FrontendHeader = () => (
   <div className='heading text-white fs-3 fw-semibold p-3'>

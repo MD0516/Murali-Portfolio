@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import dp from '/Image/DP.webp?url'
 const MobileHeader = () => {
   return (

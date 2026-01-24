@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import dp from '/Image/DP.webp?url'
 
 const About = () => {
   const events = [
@@ -96,7 +95,7 @@ const About = () => {
                 <h5 className='fw-semibold'>Have something in mind? Let’s talk</h5>
               </div>
               <div className='about-footer-link-div'>
-                <Link className='text-decoration-none fw-semibold about-footer-link d-block'>
+                <Link to={"/contact"} className='text-decoration-none fw-semibold about-footer-link d-block'>
                   Contact Me
                 </Link>
               </div>

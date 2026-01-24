@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import TypingText from '../Components/TypingText'
+import TypingText from '../Components/Utils/TypingText'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const Explore = () => {

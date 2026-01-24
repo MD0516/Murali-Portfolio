@@ -1,10 +1,16 @@
-import axios, { AxiosHeaders } from 'axios';
-import { AnimatePresence, motion, scale } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react'
-import emailjs from "@emailjs/browser"
-import EmptyFieldsAlert from '../Components/EmptyFieldsAlert';
+import EmptyFieldsAlert from '../Components/Utils/EmptyFieldsAlert';
+import { useDispatch, useSelector } from 'react-redux';
+import { SendHorizonal } from 'lucide-react';
+import { postMessage } from '../Store/contactSlice';
+import { useStateContext } from '../Context/StateContext';
 
 const Contact = () => {
+
+  const dispatch = useDispatch();
+  const { Toast } = useStateContext();
+  const { error: contactError } = useSelector(state => state.contact)
 
   const [isClicked, setIsClicked] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -82,20 +88,13 @@ const Contact = () => {
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
-
+  
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value
     }))
   }
-
-  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
-  const ADMIN_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_ADMIN
-  const USER_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_USER
-  const PUBLIC_ID = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
   const [openAlert, setOpenAlert] = useState(false);
   const handleSubmit = async (e) => {
@@ -108,129 +107,35 @@ const Contact = () => {
       return;
     }
 
-    const timestamp = new Date().toLocaleDateString();
     const form = {
-      name, email, message, timestamp
+      name, email, message
     }
 
     setIsSubmitting(true);
-    setSubmitError(false);
-    setIsSubmitted(false);
+    const toastId = Toast.loading("Sending...", "Please wait a moment")
 
     try {
-      // Send both emails and wait for them to complete
-      await Promise.all([
-        emailjs.send(SERVICE_ID, USER_TEMPLATE_ID, form, PUBLIC_ID),
-        emailjs.send(SERVICE_ID, ADMIN_TEMPLATE_ID, form, PUBLIC_ID)
-      ]);
-
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitted(true);
-
-      // Reset success state after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 3000);
-
-    } catch (error) {
-      console.log(error);
-      setSubmitError(true);
-      // Reset error state after 3 seconds
-      setTimeout(() => {
-        setSubmitError(false);
-      }, 3000);
+      const res = await dispatch(postMessage(form))
+      if (postMessage.fulfilled.match(res)) {
+        Toast.update(toastId, {
+          type: "success",
+          title: "Message sent",
+          message: "Thanks for reaching out. I'll get back to you shortly.",
+          duration: 2000
+        })
+      }
+      if (postMessage.rejected.match(res)) {
+        Toast.update(toastId, {
+          type: "error",
+          title: "Sending failed",
+          message: contactError || "Something went wrong. Please try again.",
+          duration: 2000
+        })
+      }
     } finally {
       setIsSubmitting(false);
+      setFormData({ name: "", email: "", message: "" })
     }
-  };
-
-  const getSubmitButtonContent = () => {
-    if (isSubmitted) {
-      return (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className='text-success fw-semibold custom-bg d-flex align-items-center justify-content-center gap-2'
-        >
-          <motion.svg
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ backgroundColor: "transparent" }}
-          >
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </motion.svg>
-          Message Sent!
-        </motion.div>
-      );
-    }
-
-    if (submitError) {
-      return (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className='text-danger fw-semibold custom-bg d-flex align-items-center justify-content-center gap-2'
-        >
-          <motion.svg
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </motion.svg>
-          Failed to Send
-        </motion.div>
-      );
-    }
-
-    if (isSubmitting) {
-      return (
-        <div className='custom-bg d-flex align-items-center justify-content-center gap-2'>
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-            className='loading-spinner d-inline-block custom-bg'
-            style={{
-              width: '20px',
-              height: '20px',
-              border: '2px solid transparent',
-              borderTop: '2px solid currentColor',
-              borderRadius: '50%',
-            }}
-          ></motion.div>
-          Sending...
-        </div>
-      );
-    }
-
-    return (
-      <>
-        Send Message
-        <svg xmlns="http://www.w3.org/2000/svg" className='custom-transparent mx-1' width="24" height="24" viewBox="0 0 24 24">
-          <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.76 12H6.832m0 0c0-.275-.057-.55-.17-.808L4.285 5.814c-.76-1.72 1.058-3.442 2.734-2.591L20.8 10.217c1.46.74 1.46 2.826 0 3.566L7.02 20.777c-1.677.851-3.495-.872-2.735-2.591l2.375-5.378A2 2 0 0 0 6.83 12" />
-        </svg>
-      </>
-    );
   };
 
   return (
@@ -348,10 +253,16 @@ const Contact = () => {
                     {...motionPropsPlus}
                     className={`custom-bg col-12 py-2 submit-button ${isClicked ? 'submit-button-active' : ''} ${isSubmitting ? 'opacity-75' : ''}`}
                     onClick={handleClicked}
-                    disabled={isSubmitting || isSubmitted}
+                    disabled={isSubmitting}
                   >
                     <div className='d-flex custom-bg justify-content-center'>
-                      {getSubmitButtonContent()}
+                      {
+                        isSubmitting ?
+                          "Sending..." :
+                          <span className='d-flex align-items-center gap-2 fs-5'>
+                            Send <SendHorizonal size={20} />
+                          </span>
+                      }
                     </div>
                   </motion.button>
                 </div>
