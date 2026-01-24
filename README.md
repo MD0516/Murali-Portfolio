@@ -369,8 +369,8 @@ We welcome contributions! Please follow these steps:
 
 ### Social Links
 - **GitHub**: [MD0516](https://github.com/MD0516)
-- **LinkedIn**: [Murali Dharan](https://www.linkedin.com/in/murali-dharan-30163a248/)
-- **Instagram**: [@hatetosocializ.e](https://www.instagram.com/hatetosocializ.e/)
+- **LinkedIn**: [Murali Dharan](https://www.linkedin.com/in/md0516)
+- **Instagram**: [@hatetosocializ.e](https://www.instagram.com/hatetosocializ.e)
 
 ---
 
