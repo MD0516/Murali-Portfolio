@@ -989,6 +989,37 @@ body {
   background-color: transparent !important;
 }
 
+.form-array-field input{
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #7c7b7b;
+}
+
+.form-array-field input:focus {
+  border: none;
+  border-bottom: 1px solid #fff;
+  box-shadow: none;
+}
+
+.form-array-field button{
+  border: none;
+  outline: none;
+  color: #858585;
+}
+
+.form-array-field button:hover{
+  border: 1px solid #858585;
+}
+
+.form-array-section{
+  border: 1px solid #3f3f3f;
+}
+
+.array-pill{
+  background-color: #3f3f3f;
+  color: #f0f0f0;
+}
+
 .forgot-pass {
   color: #858585;
   transition: all .2s ease;

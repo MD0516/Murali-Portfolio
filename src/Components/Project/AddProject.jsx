@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { motion } from "framer-motion"
 import { X } from 'lucide-react'
 import * as Yup from 'yup';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStateContext } from '../../Context/StateContext';
 import { addProject, editProject } from '../../Store/projectSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,19 +15,36 @@ const AddProject = ({ onClose, project }) => {
     const mode = project ? "edit" : "add"
     const id = mode === "edit" ? project?._id : null;
 
+    const [newTechnology, setNewTechnology] = useState("");
+    const [technologies, setTechnologies] = useState([])
+
+    const [newKeyFeatures, setNewKeyFeatures] = useState("");
+    const [keyFeatures, setKeyFeatures] = useState([])
+
+    const [newLearned, setNewLearned] = useState("")
+    const [whatLearned, setWhatLearned] = useState([])
+
+    useEffect(() => {
+        if (mode === "edit") {
+            setTechnologies(project?.technologies)
+            setKeyFeatures(project?.key_features)
+            setWhatLearned(project?.what_i_learned)
+        }
+    }, [project])
+
     const initialValues = {
         image: project?.image || "",
         title: project?.title || "",
         short_description: project?.short_description || "",
         description: project?.description || "",
-        technologies: project?.technologies || [],
+        technologies: project?.technologies || technologies,
         link: project?.link || "",
         repo_mode: project?.repo_mode || "public",
         repo_link: project?.repo_link || "",
-        key_features: project?.key_features || [],
+        key_features: project?.key_features || keyFeatures,
         my_role: project?.my_role || "",
         status: project?.status || "completed",
-        what_i_learned: project?.what_i_learned || [],
+        what_i_learned: project?.what_i_learned || whatLearned,
         organization: project?.organization || "",
     };
 
@@ -74,6 +91,27 @@ const AddProject = ({ onClose, project }) => {
         } finally {
             resetForm();
             onClose();
+        }
+    }
+
+    const handleAddTechnology = () => {
+        if (newTechnology.trim() && !technologies.includes(newTechnology.trim())) {
+            setTechnologies([...technologies, newTechnology]);
+            setNewTechnology("")
+        }
+    }
+
+    const handleAddKeyFeatures = () => {
+        if (newKeyFeatures.trim() && !keyFeatures.includes(newKeyFeatures.trim())) {
+            setKeyFeatures([...keyFeatures, newKeyFeatures]);
+            setNewKeyFeatures("")
+        }
+    }
+
+    const handleAddWhatLearned = () => {
+        if (newLearned.trim() && !whatLearned.includes(newLearned.trim())) {
+            setWhatLearned([...whatLearned, newLearned]);
+            setNewLearned("")
         }
     }
 
@@ -184,69 +222,102 @@ const AddProject = ({ onClose, project }) => {
 
                             <div className="row custom-transparent">
                                 <div className="form-field custom-transparent mb-3 col-12">
-                                    <label htmlFor="technologies">Technologies Used (comma separated ", ") <span>*</span> </label>
-                                    <Field name="technologies" >
-                                        {({ field, form }) => {
-                                            return (
-                                                <textarea
-                                                    {...field}
-                                                    rows={3}
-                                                    className="rounded"
-                                                    id="technologies"
-                                                    onBlur={(e) => {
-                                                        const arr = e.target.value.split(", ").map(v => v.trim())
-
-                                                        form.setFieldValue(field.name, arr)
-                                                    }}
-                                                />
-                                            )
-                                        }}
-                                    </Field>
+                                    <label htmlFor="technologies">Technologies <span>*</span> </label>
+                                    <div className='form-array-field d-flex gap-2 custom-transparent'>
+                                        <input
+                                            type="text"
+                                            name='technologies'
+                                            className='flex-grow-1'
+                                            value={newTechnology}
+                                            onChange={(e) => setNewTechnology(e.target.value)}
+                                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddTechnology() } }}
+                                        />
+                                        <button className='px-4 rounded' disabled={!newTechnology} onClick={() => { handleAddTechnology() }}>
+                                            Add
+                                        </button>
+                                    </div>
+                                    <div className='custom-transparent form-array-section rounded mt-2 py-2'>
+                                        {
+                                            technologies.length > 0 ?
+                                                <div className='custom-transparent d-flex flex-wrap gap-2 px-3'>
+                                                    {technologies.map(tech => (
+                                                        <span className='array-pill rounded px-2 py-1 text-break' >
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div> : <div className='custom-transparent text-center small py-3' style={{ color: "#888" }}>
+                                                    No Technologies added yet. Start typing above to add Technologies.
+                                                </div>
+                                        }
+                                    </div>
                                     <ErrorMessage component={"p"} name='technologies' className='text-danger' />
                                 </div>
                             </div>
 
                             <div className="row custom-transparent">
                                 <div className="form-field custom-transparent mb-3 col-12">
-                                    <label htmlFor="key_features">Key Features (comma separated ", ") <span>*</span> </label>
-                                    <Field name="key_features" >
-                                        {({ field, form }) => (
-                                            <textarea
-                                                {...field}
-                                                id='key_features'
-                                                rows={3}
-                                                className='rounded'
-
-                                                onBlur={(e) => {
-                                                    const arr = e.target.value.split(", ").map(v => v.trim())
-
-                                                    form.setFieldValue(field.name, arr)
-                                                }}
-                                            />
-                                        )}
-                                    </Field>
+                                    <label htmlFor="key_features">Key Features <span>*</span> </label>
+                                    <div className='form-array-field d-flex gap-2 custom-transparent'>
+                                        <input
+                                            type="text"
+                                            name='key_features'
+                                            className='flex-grow-1'
+                                            value={newKeyFeatures}
+                                            onChange={(e) => setNewKeyFeatures(e.target.value)}
+                                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddKeyFeatures() } }}
+                                        />
+                                        <button className='px-4 rounded' disabled={!newKeyFeatures} onClick={() => { handleAddKeyFeatures() }}>
+                                            Add
+                                        </button>
+                                    </div>
+                                    <div className='custom-transparent form-array-section rounded mt-2 py-2'>
+                                        {
+                                            keyFeatures.length > 0 ?
+                                                <div className='custom-transparent d-flex flex-wrap gap-2 px-3'>
+                                                    {keyFeatures.map(feature => (
+                                                        <span className='array-pill rounded px-2 py-1 text-break' >
+                                                            {feature}
+                                                        </span>
+                                                    ))}
+                                                </div> : <div className='custom-transparent text-center small py-3' style={{ color: "#888" }}>
+                                                    No Key features added yet. Start typing above to add Key features.
+                                                </div>
+                                        }
+                                    </div>
                                     <ErrorMessage component={"p"} name='key_features' className='text-danger' />
                                 </div>
                             </div>
 
                             <div className="row custom-transparent">
                                 <div className="form-field custom-transparent mb-3 col-12">
-                                    <label htmlFor="what_i_learned">What I Learned (comma separated ", ") <span>*</span> </label>
-                                    <Field name="what_i_learned" >
-                                        {({ field, form }) => (
-                                            <textarea
-                                                {...field}
-                                                id='what_i_learned'
-                                                rows={3}
-                                                className='rounded'
-                                                onBlur={(e) => {
-                                                    const arr = e.target.value.split(", ").map(v => v.trim())
-
-                                                    form.setFieldValue(field.name, arr)
-                                                }}
-                                            />
-                                        )}
-                                    </Field>
+                                    <label htmlFor="what_i_learned">What I Learned <span>*</span> </label>
+                                    <div className='form-array-field d-flex gap-2 custom-transparent'>
+                                        <input
+                                            type="text"
+                                            name='what_i_learned'
+                                            className='flex-grow-1'
+                                            value={newLearned}
+                                            onChange={(e) => setNewLearned(e.target.value)}
+                                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); handleAddWhatLearned() } }}
+                                        />
+                                        <button className='px-4 rounded' disabled={!newLearned} onClick={() => { handleAddWhatLearned() }}>
+                                            Add
+                                        </button>
+                                    </div>
+                                    <div className='custom-transparent form-array-section rounded mt-2 py-2'>
+                                        {
+                                            whatLearned.length > 0 ?
+                                                <div className='custom-transparent d-flex flex-wrap gap-2 px-3'>
+                                                    {whatLearned.map(learned => (
+                                                        <span className='array-pill rounded px-2 py-1 text-break' >
+                                                            {learned}
+                                                        </span>
+                                                    ))}
+                                                </div> : <div className='custom-transparent text-center small py-3' style={{ color: "#888" }}>
+                                                    No learnings added yet. Start typing above to add Learnings.
+                                                </div>
+                                        }
+                                    </div>
                                     <ErrorMessage component={"p"} name='what_i_learned' className='text-danger' />
                                 </div>
                             </div>
