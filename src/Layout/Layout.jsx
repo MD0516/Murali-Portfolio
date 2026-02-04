@@ -15,8 +15,14 @@ import MobileMenuPopup from '../Components/UI/MobileMenuPopup'
 import ToastContainer from '../Components/UI/ToastContainer'
 import LoadingBarWrapper from '../Components/UI/LoadingBarWrapper'
 import AddProjectButton from '../Components/UI/AddProjectButton'
+import { fetchPendingFeedbacks } from '../Store/pendingFeedbackSlice'
 
 const Layout = () => {
+
+  const { user, isAuthenticated } = useSelector(state => state.auth)
+  const { error: feedbackError } = useSelector(state => state.feedbacks)
+  const { list: pendingFeedbacks, loading: pendingFeedbackLoading, error: fendingFeedbackError } = useSelector(state => state.pendingFeedbacks)
+  const { toggleSidebar, isMobile, setAddProject, toasts, Toast } = useStateContext();
 
   const dispatch = useDispatch()
 
@@ -25,9 +31,11 @@ const Layout = () => {
     dispatch(fetchProjects())
   }, [])
 
-  const { user, isAuthenticated, loading } = useSelector(state => state.auth)
-  const { list: projects, error: feedbackError } = useSelector(state => state.projects)
-  const { toggleSidebar, isMobile, setAddProject, toasts, Toast } = useStateContext();
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchPendingFeedbacks(user?._id))
+    }
+  }, [isAuthenticated])
 
   const location = useLocation();
   const ref = useRef(null);
@@ -36,15 +44,14 @@ const Layout = () => {
   const isProjectsPage = path === '/projects';
   const isAdmin = user?.role === "admin"
   const [showPending, setShowPending] = useState(false)
-  const pendingFeedback = JSON.parse(localStorage.getItem("pendingFeedback"));
 
   useEffect(() => {
-    if (pendingFeedback) {
+    if (pendingFeedbacks.length > 0) {
       setShowPending(true)
     } else {
       setShowPending(false)
     }
-  }, [showPending, pendingFeedback])
+  }, [showPending, pendingFeedbacks])
 
   useEffect(() => {
     ref.current?.continuousStart();
@@ -138,11 +145,9 @@ const Layout = () => {
 
       {isAuthenticated && showPending &&
         <PendingFeedback
-          pendingFeedback={pendingFeedback}
-          projects={projects}
+          pendingFeedbacks={pendingFeedbacks}
           onClose={() => {
             setShowPending(false);
-            localStorage.removeItem("pendingFeedback")
           }}
           user={user}
           error={feedbackError}

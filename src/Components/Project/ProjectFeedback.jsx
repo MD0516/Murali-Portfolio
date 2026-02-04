@@ -187,7 +187,7 @@ const Loader = () => {
 };
 
 
-const AddCommentatorForm = ({ onClose, dispatch, loading, Toast, error }) => {
+const AddCommentatorForm = ({ onClose, dispatch, loading, Toast, error, feedbackTxt, project }) => {
     const initialValues = {
         name: "",
         email: ""
@@ -199,8 +199,14 @@ const AddCommentatorForm = ({ onClose, dispatch, loading, Toast, error }) => {
     })
 
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+        const payload = {
+            name: values.name,
+            email: values.email,
+            projectId: project._id,
+            feedbackText: feedbackTxt
+        }
         try {
-            const res = await dispatch(requestMagicLink(values))
+            const res = await dispatch(requestMagicLink(payload))
             if (requestMagicLink.fulfilled.match(res)) {
                 Toast.success(
                     "Email Sent",
@@ -217,7 +223,6 @@ const AddCommentatorForm = ({ onClose, dispatch, loading, Toast, error }) => {
             setSubmitting(false);
             resetForm();
             onClose();
-
         }
     }
 
@@ -489,8 +494,8 @@ const ProjectFeedback = ({ isRight, project, isClosing }) => {
     useEffect(() => {
         dispatch(fetchFeedbacks(project._id))
     }, [project])
-
-    // const [feedbacks, setFeedbacks] = useState([])
+    
+    const [feedbackTxt, setFeedbackTxt] = useState("")
     const [addCommentator, setAddCommentator] = useState(false);
     const [editMode, setEditMode] = useState(null)
     const [editFeedbackTxt, setEditFeedbackTxt] = useState("")
@@ -520,6 +525,7 @@ const ProjectFeedback = ({ isRight, project, isClosing }) => {
     })
 
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+        setFeedbackTxt(values.comment)
         try {
             if (isAuthenticated) {
                 const payload = {
@@ -669,6 +675,8 @@ const ProjectFeedback = ({ isRight, project, isClosing }) => {
                                 loading={mailLoading}
                                 Toast={Toast}
                                 error={authError}
+                                feedbackTxt={feedbackTxt}
+                                project={project}
                             />
                             : <>
                                 {sortedFeedbacks.length === 0 ?

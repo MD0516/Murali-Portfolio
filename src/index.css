@@ -1408,3 +1408,12 @@ body {
     width: 400px;
   }
 }
+
+.pending-feedback-card{
+  border-bottom: 1px solid #838383;
+}
+
+.pending-feedback-overflow{
+  height: 400px;
+  overflow-y: scroll !important;
+}

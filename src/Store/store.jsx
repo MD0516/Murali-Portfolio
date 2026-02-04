@@ -3,13 +3,15 @@ import authSlice from "./authSlice"
 import projectSlice from "./projectSlice"
 import feedbackSlice from "./feedbackSlice"
 import contactSlice from "./contactSlice"
+import pendingFeedbackSlice from "./pendingFeedbackSlice"
 
 export const store = configureStore({
     reducer: {
         auth: authSlice,
         projects: projectSlice,
         feedbacks: feedbackSlice,
-        contact: contactSlice
+        contact: contactSlice,
+        pendingFeedbacks: pendingFeedbackSlice
     },
-    devTools: false
+    // devTools: false
 })
