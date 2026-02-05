@@ -395,7 +395,6 @@ const Verify = () => {
         }
 
         const payload = { token }
-        console.log(token)
         dispatch(verifyMagicLink(payload))
     }, []) 
     
