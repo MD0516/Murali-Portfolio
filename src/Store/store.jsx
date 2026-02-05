@@ -13,5 +13,5 @@ export const store = configureStore({
         contact: contactSlice,
         pendingFeedbacks: pendingFeedbackSlice
     },
-    // devTools: false
+    devTools: import.meta.env.VITE_APP_ENV !== "production"
 })
