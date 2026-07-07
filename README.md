@@ -9,7 +9,6 @@
 
 A modern, full-stack portfolio website showcasing full-stack development skills with comprehensive admin functionality for content management. Built with React 19, Redux Toolkit, and Bootstrap, featuring smooth animations, responsive design, secure authentication, and optimized performance.
 
-![Portfolio Preview]([https://opengraph.b-cdn.net/production/images/eb8cfd62-2fe5-4a0d-afba-0ce21188466a.png?token=EGEw_czAnmH4Tzp5lDmBLuymQ8Jj48D_Xka6r1d4MJQ&height=630&width=1200&expires=33286485986](https://murali-portfolio-amber.vercel.app/OG-Img.png))
 
 ## Table of Contents
 
